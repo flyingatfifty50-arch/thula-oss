@@ -1,7 +1,0 @@
-/* ============================================================
-   THULA TRAVEL — Design System entry stylesheet
-   Single import surface for consumers. Pulls in the colour &
-   type foundations plus the brand webfont @font-face rules.
-   ============================================================ */
-@import url('colors_and_type.css');
-@import url('social/fonts-embed.css');
