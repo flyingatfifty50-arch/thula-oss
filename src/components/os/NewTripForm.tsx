@@ -8,7 +8,7 @@ export function NewTripForm({ defaultDestination }: { defaultDestination: string
 
   return (
     <form action={formAction} style={{ background: "var(--card)", border: "1px solid var(--line)", borderRadius: "var(--r-md)", padding: "24px 26px", maxWidth: 600, boxShadow: "var(--shadow-sm)" }}>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 18 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 14 }}>
         <div>
           <label style={{ fontSize: 11.5, fontWeight: 600, color: "var(--fg2)", display: "block", marginBottom: 6 }}>Client name</label>
           <input
@@ -25,6 +25,27 @@ export function NewTripForm({ defaultDestination }: { defaultDestination: string
             required
             defaultValue={defaultDestination}
             placeholder="e.g. South Africa"
+            style={{ width: "100%", border: "1.5px solid var(--line)", borderRadius: 8, padding: "9px 13px", fontSize: "0.88rem", color: "var(--fg1)", fontFamily: "inherit" }}
+          />
+        </div>
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 18 }}>
+        <div>
+          <label style={{ fontSize: 11.5, fontWeight: 600, color: "var(--fg2)", display: "block", marginBottom: 6 }}>Client email</label>
+          <input
+            name="clientEmail"
+            type="email"
+            required
+            placeholder="e.g. brid@example.com"
+            style={{ width: "100%", border: "1.5px solid var(--line)", borderRadius: 8, padding: "9px 13px", fontSize: "0.88rem", color: "var(--fg1)", fontFamily: "inherit" }}
+          />
+          <p style={{ fontSize: 10.5, color: "var(--fg3)", margin: "4px 0 0" }}>This is what they&apos;ll use to log in to the Client Portal.</p>
+        </div>
+        <div>
+          <label style={{ fontSize: 11.5, fontWeight: 600, color: "var(--fg2)", display: "block", marginBottom: 6 }}>Client phone (optional)</label>
+          <input
+            name="clientPhone"
+            placeholder="e.g. +353 87 123 4567"
             style={{ width: "100%", border: "1.5px solid var(--line)", borderRadius: 8, padding: "9px 13px", fontSize: "0.88rem", color: "var(--fg1)", fontFamily: "inherit" }}
           />
         </div>

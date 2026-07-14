@@ -7,7 +7,9 @@ import { createClient } from "@/lib/supabase/server";
 export async function createTrip(_prev: { error?: string } | null, formData: FormData) {
   const clientName = String(formData.get("clientName") ?? "").trim();
   const destination = String(formData.get("destination") ?? "").trim();
-  if (!clientName || !destination) return { error: "Client name and destination are required." };
+  const clientEmail = String(formData.get("clientEmail") ?? "").trim();
+  const clientPhone = String(formData.get("clientPhone") ?? "").trim();
+  if (!clientName || !destination || !clientEmail) return { error: "Client name, email and destination are required." };
 
   const supabase = await createClient();
   const { data: profile } = await supabase.from("staff_profiles").select("agency_id").single();
@@ -15,7 +17,7 @@ export async function createTrip(_prev: { error?: string } | null, formData: For
 
   const { data: client, error: clientError } = await supabase
     .from("clients")
-    .insert({ agency_id: profile.agency_id, name: clientName, stage: "Draft", tone: "amber" })
+    .insert({ agency_id: profile.agency_id, name: clientName, email: clientEmail, phone: clientPhone || null, stage: "Draft", tone: "amber" })
     .select()
     .single();
   if (clientError || !client) return { error: clientError?.message ?? "Could not create client." };

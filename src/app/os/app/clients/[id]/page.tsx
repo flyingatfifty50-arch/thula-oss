@@ -5,6 +5,8 @@ import { Icon } from "@/lib/icons";
 import { Pill, type PillTone } from "@/components/Pill";
 import { formatEuros } from "@/lib/money";
 import { PreviewToggle } from "@/components/os/PreviewToggle";
+import { EditClientForm } from "@/components/os/EditClientForm";
+import { ManageFlights, ManageHotels, ManageItinerary } from "@/components/os/ManageTrip";
 
 export default async function ClientDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -35,15 +37,30 @@ export default async function ClientDetailPage({ params }: { params: Promise<{ i
     .eq("client_id", id)
     .order("created_at", { ascending: true });
 
+  const { data: flights } = liveTrip
+    ? await supabase.from("flights").select("*").eq("trip_id", liveTrip.id).order("sort_order", { ascending: true })
+    : { data: [] };
+  const { data: hotels } = liveTrip
+    ? await supabase.from("hotels").select("*").eq("trip_id", liveTrip.id).order("sort_order", { ascending: true })
+    : { data: [] };
+  const { data: itineraryDays } = liveTrip
+    ? await supabase.from("itinerary_days").select("*").eq("trip_id", liveTrip.id).order("sort_order", { ascending: true })
+    : { data: [] };
+
   return (
     <div>
       <Link href="/os/app/clients" style={{ background: "none", border: "none", color: "var(--accent)", fontSize: 13, fontWeight: 600, textDecoration: "none", display: "inline-block", marginBottom: 16 }}>
         ← All clients
       </Link>
       <h2 style={{ fontFamily: "var(--font-script)", fontWeight: 600, fontSize: "1.8rem", margin: "0 0 6px", color: "var(--fg1)" }}>{client.name}</h2>
-      <p style={{ fontSize: "0.95rem", color: "var(--fg3)", margin: "0 0 22px" }}>
+      <p style={{ fontSize: "0.95rem", color: "var(--fg3)", margin: "0 0 4px" }}>
         {liveTrip ? `${[liveTrip.destination_line1, liveTrip.destination_line2].filter(Boolean).join(" ")} · ${liveTrip.date_range ?? ""}` : "No trip yet"}
       </p>
+      <p style={{ fontSize: "0.85rem", color: "var(--fg3)", margin: "0 0 14px" }}>
+        {client.email ?? "No email on file"} {client.phone ? `· ${client.phone}` : ""}
+      </p>
+
+      <EditClientForm client={{ id: client.id, name: client.name, email: client.email, phone: client.phone, stage: client.stage }} />
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 14, marginBottom: 20 }}>
         <div style={{ background: "var(--card)", border: "1px solid var(--line)", borderRadius: "var(--r-md)", padding: 16 }}>
@@ -128,6 +145,14 @@ export default async function ClientDetailPage({ params }: { params: Promise<{ i
           </div>
         </div>
       </div>
+
+      {liveTrip && (
+        <>
+          <ManageFlights clientId={client.id} tripId={liveTrip.id} flights={flights ?? []} />
+          <ManageHotels clientId={client.id} tripId={liveTrip.id} hotels={hotels ?? []} />
+          <ManageItinerary clientId={client.id} tripId={liveTrip.id} days={itineraryDays ?? []} />
+        </>
+      )}
 
       <div style={{ background: "var(--card)", border: "1px solid var(--line)", borderRadius: "var(--r-md)", padding: "20px 22px", boxShadow: "var(--shadow-sm)", marginBottom: 16 }}>
         <div style={{ fontSize: 11, letterSpacing: "0.06em", textTransform: "uppercase", color: "var(--fg3)", fontWeight: 600, marginBottom: 12 }}>Pre-departure AI checks</div>
