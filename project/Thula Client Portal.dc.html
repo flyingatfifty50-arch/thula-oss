@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link rel="stylesheet" href="_ds/thula-travel-design-system-e4d7566b-09e7-4eb9-8cfb-fa504a40e344/colors_and_type.css">
+  <link rel="stylesheet" href="_ds/thula-travel-design-system-e4d7566b-09e7-4eb9-8cfb-fa504a40e344/social/fonts-embed.css">
+  <link rel="stylesheet" href="_ds/thula-travel-design-system-e4d7566b-09e7-4eb9-8cfb-fa504a40e344/styles.css">
+  <script src="_ds/thula-travel-design-system-e4d7566b-09e7-4eb9-8cfb-fa504a40e344/_ds_bundle.js"></script>
+  <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.js"></script>
+  <style>body{margin:0;background:var(--sand);}</style>
+</helmet>
+
+<div style="font-family:var(--font-serif);color:var(--fg1);--accent:#317653;--sage-600:#317653;--deep:#317653;min-height:100vh;">
+
+  <!-- ============ LOGIN ============ -->
+  <sc-if value="{{ isLogin }}">
+    <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--deep);padding:20px;">
+      <div style="background:var(--card);border-radius:var(--r-lg);box-shadow:var(--shadow-lg);width:100%;max-width:400px;padding:40px 36px;text-align:center;">
+        <x-import component-from-global-scope="Wordmark" size="28" hint-size="110px,36px"></x-import>
+        <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--primary);margin:18px 0 4px;">Client portal</p>
+        <h1 style="font-family:var(--font-script);font-size:1.6rem;font-weight:700;margin:0 0 22px;color:var(--fg1);">Welcome back, Brid</h1>
+        <div style="text-align:left;margin-bottom:14px;">
+          <label style="font-size:12px;font-weight:600;color:var(--fg2);display:block;margin-bottom:6px;">Email</label>
+          <div style="border:1.5px solid var(--line);border-radius:var(--r-pill);padding:11px 16px;font-size:0.9rem;color:var(--fg3);">brid@email.com</div>
+        </div>
+        <button onClick="{{ login }}" style="width:100%;background:var(--primary);color:#fff;border:none;border-radius:var(--r-pill);padding:13px 0;font-size:0.95rem;font-weight:600;cursor:pointer;">Send me a login link</button>
+        <p style="font-size:0.78rem;color:var(--fg3);margin:18px 0 0;">No password needed &mdash; we'll email a secure link.</p>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ APP SHELL ============ -->
+  <sc-if value="{{ isApp }}">
+    <div style="max-width:720px;margin:0 auto;min-height:100vh;background:var(--paper);box-shadow:0 0 60px rgba(30,36,28,0.08);">
+
+      <div style="background:var(--deep);padding:20px 28px;display:flex;justify-content:space-between;align-items:center;">
+        <x-import component-from-global-scope="Wordmark" size="19" color="var(--fg-on-dark)" hint-size="74px,25px"></x-import>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <sc-if value="{{ isDetail }}">
+            <button onClick="{{ backHome }}" style="background:none;border:none;color:var(--fg-on-dark);font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px;padding:0;">&larr; Trips</button>
+          </sc-if>
+          <sc-if value="{{ isConcierge }}">
+            <button onClick="{{ backHome }}" style="background:none;border:none;color:var(--fg-on-dark);font-size:13px;cursor:pointer;display:flex;align-items:center;gap:6px;padding:0;">&larr; Trips</button>
+          </sc-if>
+          <button onClick="{{ goAccount }}" style="display:flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;padding:0;">
+            <div style="width:28px;height:28px;border-radius:50%;background:var(--secondary);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--ink);">B</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- TRIPS LIST -->
+      <sc-if value="{{ isHome }}">
+        <div style="padding:32px 28px;">
+          <h2 style="font-family:var(--font-script);font-weight:600;font-size:1.9rem;margin:0 0 4px;color:var(--fg1);">Welcome back, Brid</h2>
+          <p style="font-size:0.9rem;color:var(--fg3);margin:0 0 24px;">Your South Africa trip departs in 12 days.</p>
+
+          <div onClick="{{ openTrip }}" style="background:var(--sage-100);border:1px solid var(--sage-300);border-radius:var(--r-md);padding:20px 22px;margin-bottom:26px;display:flex;align-items:center;gap:16px;cursor:pointer;">
+            <div style="color:var(--accent);"><x-import component-from-global-scope="Icon" name="plane" size="26" hint-size="26px,26px"></x-import></div>
+            <div style="flex:1;"><div style="font-weight:700;font-size:1.05rem;color:var(--fg1);">South Africa 2026</div><div style="font-size:0.85rem;color:var(--fg3);">25 Jun &ndash; 7 Jul &middot; Cape Town, Addo, Franschhoek</div></div>
+            <span style="background:var(--primary);color:#fff;font-size:12.5px;font-weight:600;padding:9px 16px;border-radius:var(--r-pill);white-space:nowrap;">Open trip</span>
+          </div>
+
+          <h4 style="font-family:var(--font-serif);font-weight:600;font-size:1rem;margin:0 0 12px;color:var(--fg1);">Past trips, kept forever</h4>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;">
+            <sc-for list="{{ pastTrips }}" as="pt" hint-placeholder-count="2">
+              <div onClick="{{ pt.open }}" style="background:{{ pt.gradient }};border-radius:var(--r-md);height:100px;position:relative;cursor:pointer;">
+                <span style="position:absolute;bottom:10px;left:12px;color:#fff;font-size:0.85rem;font-weight:600;text-shadow:0 1px 6px rgba(0,0,0,0.4);">{{ pt.label }}</span>
+                <span style="position:absolute;top:10px;right:10px;background:rgba(31,30,26,0.5);color:#fff;font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px;">Journal</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <!-- Floating concierge launcher -->
+        <button onClick="{{ openConcierge }}" style="position:fixed;bottom:24px;right:24px;background:var(--primary);color:#fff;border:none;border-radius:var(--r-pill);padding:13px 20px;font-size:0.88rem;font-weight:700;cursor:pointer;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:8px;z-index:20;">
+          <x-import component-from-global-scope="Icon" name="sparkles" size="16" hint-size="16px,16px"></x-import>Ask Thula
+        </button>
+      </sc-if>
+
+      <!-- THULA CONCIERGE (AI chat) -->
+      <sc-if value="{{ isConcierge }}">
+        <div style="display:flex;flex-direction:column;height:calc(100vh - 68px);">
+          <div style="padding:20px 28px 14px;border-bottom:1px solid var(--line);">
+            <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--primary);margin:0 0 4px;">Your Thula concierge</p>
+            <h2 style="font-family:var(--font-script);font-weight:600;font-size:1.5rem;margin:0;color:var(--fg1);">Ask me anything</h2>
+            <p style="font-size:0.82rem;color:var(--fg3);margin:6px 0 0;">Restaurants, safety, what to wear, local know-how &mdash; day or night, while you're away.</p>
+          </div>
+
+          <div style="padding:12px 28px 0;">
+            <a href="https://chatgpt.com/g/g-p-68f0c28c45688191ba31189e2a5f9cc8-thulagpt/project" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;background:var(--sand);border:1px solid var(--line);border-radius:var(--r-md);padding:10px 14px;text-decoration:none;">
+              <span style="font-size:0.8rem;color:var(--fg2);display:flex;align-items:center;gap:8px;"><x-import component-from-global-scope="Icon" name="external-link" size="14" hint-size="14px,14px"></x-import>Prefer ThulaGPT directly? Open it here</span>
+              <span style="color:var(--accent);font-size:0.78rem;font-weight:600;">Open &rsaquo;</span>
+            </a>
+          </div>
+
+          <div style="flex:1;overflow-y:auto;padding:20px 28px;display:flex;flex-direction:column;gap:14px;">
+            <sc-for list="{{ chatMessages }}" as="m" hint-placeholder-count="3">
+              <div style="display:flex;{{ m.rowStyle }}">
+                <div style="max-width:80%;background:{{ m.bg }};color:{{ m.color }};border-radius:{{ m.radius }};padding:12px 16px;font-size:0.9rem;line-height:1.55;white-space:pre-wrap;">{{ m.text }}</div>
+              </div>
+            </sc-for>
+            <sc-if value="{{ isThinking }}">
+              <div style="display:flex;justify-content:flex-start;">
+                <div style="background:var(--sand);border-radius:16px 16px 16px 4px;padding:12px 16px;font-size:0.9rem;color:var(--fg3);">Thinking&hellip;</div>
+              </div>
+            </sc-if>
+          </div>
+
+          <div style="padding:14px 28px 22px;border-top:1px solid var(--line);">
+            <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;">
+              <sc-for list="{{ suggestedPrompts }}" as="sp" hint-placeholder-count="3">
+                <button onClick="{{ sp.ask }}" style="background:var(--sage-100);border:1px solid var(--sage-300);color:var(--accent);font-size:0.78rem;font-weight:600;padding:6px 12px;border-radius:var(--r-pill);cursor:pointer;">{{ sp.label }}</button>
+              </sc-for>
+            </div>
+            <div style="display:flex;gap:8px;">
+              <div style="flex:1;border:1.5px solid var(--line);border-radius:var(--r-pill);padding:11px 16px;font-size:0.88rem;color:var(--fg3);">{{ draftMessage }}</div>
+              <button onClick="{{ sendMessage }}" style="background:var(--primary);color:#fff;border:none;border-radius:50%;width:42px;height:42px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;"><x-import component-from-global-scope="Icon" name="arrow-up" size="18" hint-size="18px,18px"></x-import></button>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- TRIP JOURNAL (Polarsteps-style recap) -->
+      <sc-if value="{{ isJournal }}">
+        <div style="padding:32px 28px;">
+          <button onClick="{{ backHome }}" style="background:none;border:none;color:var(--accent);font-size:13px;font-weight:600;cursor:pointer;padding:0;margin-bottom:16px;">&larr; Trips</button>
+          <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--primary);margin:0 0 6px;">Trip journal</p>
+          <h2 style="font-family:var(--font-script);font-weight:600;font-size:1.9rem;margin:0 0 18px;color:var(--fg1);">{{ selectedJournal.title }}</h2>
+
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px;">
+            <sc-for list="{{ selectedJournal.stats }}" as="st" hint-placeholder-count="4">
+              <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-sm);padding:10px 8px;text-align:center;">
+                <div style="font-family:var(--font-script);font-size:1.15rem;font-weight:700;color:var(--accent);line-height:1;">{{ st.n }}</div>
+                <div style="font-size:9.5px;color:var(--fg3);text-transform:uppercase;letter-spacing:0.05em;margin-top:3px;">{{ st.l }}</div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:8px;margin-bottom:22px;box-shadow:var(--shadow-sm);">
+            <svg style="display:block;width:100%;height:auto;border-radius:8px;" viewBox="0 0 400 220" aria-label="Route map">
+              <rect width="400" height="220" fill="#FFF3D6"></rect>
+              <path d="M60,170 Q160,60 340,110" fill="none" stroke="#DE3831" stroke-opacity="0.55" stroke-width="2" stroke-dasharray="5 5"></path>
+              <sc-for list="{{ selectedJournal.pins }}" as="pin" hint-placeholder-count="3">
+                <circle cx="{{ pin.x }}" cy="{{ pin.y }}" r="8" fill="var(--accent)"></circle>
+              </sc-for>
+            </svg>
+          </div>
+
+          <h4 style="font-family:var(--font-serif);font-weight:600;font-size:1rem;margin:0 0 14px;color:var(--fg1);">Along the way</h4>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <sc-for list="{{ selectedJournal.entries }}" as="en" hint-placeholder-count="4">
+              <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;box-shadow:var(--shadow-sm);">
+                <div style="height:110px;background:{{ en.gradient }};"></div>
+                <div style="padding:12px 16px;">
+                  <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+                    <div style="color:var(--accent);"><x-import component-from-global-scope="Icon" name="map-pin" size="13" hint-size="13px,13px"></x-import></div>
+                    <span style="font-size:11px;color:var(--fg3);font-weight:600;">{{ en.place }} &middot; {{ en.date }}</span>
+                  </div>
+                  <p style="font-size:0.88rem;color:var(--fg1);margin:0;line-height:1.5;">{{ en.caption }}</p>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- TRIP DETAIL (mirrors the mobile app's own tabs, read-only summary here) -->
+      <sc-if value="{{ isDetail }}">
+        <div style="padding:32px 28px;">
+          <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--primary);margin:0 0 6px;">Live trip</p>
+          <h2 style="font-family:var(--font-script);font-weight:600;font-size:1.9rem;margin:0 0 20px;color:var(--fg1);">South Africa 2026</h2>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">
+            <sc-for list="{{ tripLinks }}" as="l" hint-placeholder-count="4">
+              <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:16px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow-sm);">
+                <div style="color:{{ l.color }};"><x-import component-from-global-scope="Icon" name="{{ l.icon }}" size="20" hint-size="20px,20px"></x-import></div>
+                <div><div style="font-weight:700;font-size:0.9rem;color:var(--fg1);">{{ l.label }}</div><div style="font-size:0.75rem;color:var(--fg3);">{{ l.sub }}</div></div>
+              </div>
+            </sc-for>
+          </div>
+          <p style="font-size:0.85rem;color:var(--fg3);margin:20px 0 0;">For the full day-by-day view, flights and hotel details, open the trip app on your phone &mdash; the same link is in your welcome email.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;">
+            <button onClick="{{ openLiveJournal }}" style="display:flex;align-items:center;gap:8px;background:var(--sage-100);border:1px solid var(--sage-300);color:var(--accent);font-size:0.85rem;font-weight:600;padding:11px 16px;border-radius:var(--r-pill);cursor:pointer;"><x-import component-from-global-scope="Icon" name="map" size="15" hint-size="15px,15px"></x-import>View trip journal (fills in as you travel)</button>
+            <button onClick="{{ openConcierge }}" style="display:flex;align-items:center;gap:8px;background:var(--primary);border:none;color:#fff;font-size:0.85rem;font-weight:700;padding:11px 16px;border-radius:var(--r-pill);cursor:pointer;"><x-import component-from-global-scope="Icon" name="sparkles" size="15" hint-size="15px,15px"></x-import>Ask Thula concierge</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <!-- ACCOUNT -->
+      <sc-if value="{{ isAccount }}">
+        <div style="padding:32px 28px;">
+          <button onClick="{{ backHome }}" style="background:none;border:none;color:var(--accent);font-size:13px;font-weight:600;cursor:pointer;padding:0;margin-bottom:16px;">&larr; Trips</button>
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px;">
+            <div style="width:48px;height:48px;border-radius:50%;background:var(--secondary);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:var(--ink);">B</div>
+            <div><div style="font-weight:700;font-size:1.05rem;color:var(--fg1);">Brid Walsh</div><div style="font-size:0.8rem;color:var(--fg3);">brid@email.com</div></div>
+          </div>
+          <div style="font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fg3);font-weight:600;margin-bottom:8px;">Trip preferences</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;">
+            <x-import component-from-global-scope="Pill" tone="sage" hint-size="auto,26px">Group travel</x-import>
+            <x-import component-from-global-scope="Pill" tone="amber" hint-size="auto,26px">Wildlife</x-import>
+            <x-import component-from-global-scope="Pill" tone="clay" hint-size="auto,26px">Wine &amp; food</x-import>
+          </div>
+          <div style="font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fg3);font-weight:600;margin-bottom:8px;">Notifications</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--line-soft);font-size:0.9rem;color:var(--fg1);">WhatsApp trip reminders<span style="width:34px;height:18px;background:var(--accent);border-radius:20px;display:inline-block;"></span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 0;font-size:0.9rem;color:var(--fg1);">Email itinerary updates<span style="width:34px;height:18px;background:var(--accent);border-radius:20px;display:inline-block;"></span></div>
+        </div>
+      </sc-if>
+
+    </div>
+  </sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+const TRIP_LINKS = [
+  {icon:"plane", label:"Flights", sub:"6 flights", color:"var(--accent)"},
+  {icon:"bed-double", label:"Hotels", sub:"3 properties", color:"var(--primary)"},
+  {icon:"calendar-days", label:"Itinerary", sub:"12 days", color:"var(--secondary)"},
+  {icon:"life-buoy", label:"Emergency", sub:"Key contacts", color:"var(--primary)"},
+];
+
+const PAST_TRIPS_DATA = [
+  {id:"italy", label:"Italy \u00b7 2024", gradient:"var(--fig-fynbos)"},
+  {id:"kenya", label:"Kenya \u00b7 2022", gradient:"var(--fig-savanna)"},
+];
+
+const JOURNALS_DATA = {
+  live: {
+    title:"South Africa 2026",
+    stats:[{n:"3",l:"Regions"},{n:"12",l:"Days"},{n:"0",l:"Photos so far"},{n:"1,840km",l:"Travelled"}],
+    pins:[{x:60,y:170},{x:200,y:90},{x:340,y:110}],
+    entries:[
+      {place:"Cape Town", date:"Day 1", gradient:"var(--fig-fynbos)", caption:"Trip hasn't started yet \u2014 entries and photos will appear here automatically as you travel."},
+    ],
+  },
+  italy: {
+    title:"Italy \u00b7 2024",
+    stats:[{n:"3",l:"Cities"},{n:"10",l:"Days"},{n:"86",l:"Photos"},{n:"620km",l:"Travelled"}],
+    pins:[{x:80,y:150},{x:210,y:80},{x:330,y:130}],
+    entries:[
+      {place:"Rome", date:"Day 1\u20133", gradient:"var(--fig-fynbos)", caption:"Arrived in Rome \u2014 first gelato within the hour."},
+      {place:"Florence", date:"Day 4\u20136", gradient:"var(--sage-300)", caption:"Sunset over the Arno from Piazzale Michelangelo."},
+      {place:"Amalfi Coast", date:"Day 7\u201310", gradient:"var(--fig-savanna)", caption:"Last few days on the coast \u2014 the drive down was the highlight."},
+    ],
+  },
+  kenya: {
+    title:"Kenya \u00b7 2022",
+    stats:[{n:"2",l:"Regions"},{n:"9",l:"Days"},{n:"142",l:"Photos"},{n:"410km",l:"Travelled"}],
+    pins:[{x:100,y:120},{x:260,y:150}],
+    entries:[
+      {place:"Nairobi", date:"Day 1\u20132", gradient:"var(--fig-savanna)", caption:"Settling in before heading out to the Mara."},
+      {place:"Maasai Mara", date:"Day 3\u20139", gradient:"var(--fig-fynbos)", caption:"Lion sighting on the very first game drive."},
+    ],
+  },
+};
+
+const SUGGESTED_PROMPTS = [
+  "Good dinner near Franschhoek tonight?",
+  "Is it safe to walk in Sea Point at night?",
+  "What should I wear on the safari drive?",
+];
+
+// Canned demo answers standing in for the live ThulaGPT integration.
+// ThulaGPT lives at: https://chatgpt.com/g/g-p-68f0c28c45688191ba31189e2a5f9cc8-thulagpt/project
+// That's a ChatGPT "project" URL, built for a logged-in human in the ChatGPT
+// UI — it has no public API endpoint, so this in-app chat can't call it
+// directly from client-side code. Two real integration paths:
+//  1) Recreate ThulaGPT's system prompt/knowledge as a call to the OpenAI
+//     Assistants/Chat Completions API (or Claude) from a small backend,
+//     passing this trip's context (dates, destinations, hotel, itinerary)
+//     each turn so answers stay trip-specific.
+//  2) Keep ThulaGPT as-is and just deep-link out to it (done below) for
+//     clients happy to use ChatGPT directly.
+// Until wired to a real model, runFakeConcierge() below stands in.
+const CANNED_ANSWERS = [
+  {match: /dinner|restaurant|eat|food/i, reply: "For tonight, book Foliage or Reuben's in Franschhoek \u2014 both walkable from Centre-Ville. Ask for the terrace table if it's clear, it's the best seat in the village.\n\nWant me to have Gillian call ahead and book it for you?"},
+  {match: /safe|safety|walk/i, reply: "Sea Point's Beach Road is well-lit and busy with joggers even after dark, so it's generally fine. As anywhere, stick to the main promenade rather than side streets, and keep valuables out of sight in the car.\n\nIf anything feels off, the Emergency tab has local numbers on speed-dial."},
+  {match: /wear|pack|clothes|cold/i, reply: "Mornings at Addo are properly cold \u2014 layer up, you'll be glad of a fleece and gloves in the open safari vehicle. It warms quickly by mid-morning, so bring something you can peel off too."},
+  {match: /whale|wildlife|animal/i, reply: "Great timing \u2014 whale season's just starting. Keep an eye on the water during the Chapman's Peak drive, they're often visible from the road this time of year."},
+];
+function runFakeConcierge(question) {
+  const hit = CANNED_ANSWERS.find(a => a.match.test(question));
+  return hit ? hit.reply : "That's a great question \u2014 I'll check with your local guide and get back to you shortly. In the meantime, anything urgent is best sent straight to Gillian via WhatsApp.";
+}
+
+class Component extends DCLogic {
+  state = {
+    loggedIn: false, screen: "home", journalId: null,
+    chatMessages: [
+      {from:"assistant", text:"Hi Brid! I'm your Thula concierge \u2014 ask me anything while you're away: restaurants, safety, what to pack for tomorrow, whatever comes up."},
+    ],
+    isThinking: false,
+  };
+
+  login() { this.setState({ loggedIn: true }); }
+  goTo(screen) { this.setState({ screen }); }
+  openJournal(id) { this.setState({ screen: "journal", journalId: id }); }
+
+  sendPrompt(text) {
+    const userMsg = { from: "user", text };
+    this.setState(s => ({ chatMessages: [...s.chatMessages, userMsg], isThinking: true }));
+    setTimeout(() => {
+      const reply = { from: "assistant", text: runFakeConcierge(text) };
+      this.setState(s => ({ chatMessages: [...s.chatMessages, reply], isThinking: false }));
+    }, 900);
+  }
+
+  renderVals() {
+    const s = this.state;
+    const pastTrips = PAST_TRIPS_DATA.map(pt => ({ ...pt, open: () => this.openJournal(pt.id) }));
+    const selectedJournal = JOURNALS_DATA[s.journalId] || JOURNALS_DATA.live;
+
+    const chatMessages = s.chatMessages.map(m => ({
+      ...m,
+      rowStyle: m.from === "user" ? "justify-content:flex-end;" : "justify-content:flex-start;",
+      bg: m.from === "user" ? "var(--primary)" : "var(--sand)",
+      color: m.from === "user" ? "#fff" : "var(--fg1)",
+      radius: m.from === "user" ? "16px 16px 4px 16px" : "16px 16px 16px 4px",
+    }));
+
+    const suggestedPrompts = SUGGESTED_PROMPTS.map(label => ({ label, ask: () => this.sendPrompt(label) }));
+
+    return {
+      isLogin: !s.loggedIn,
+      isApp: s.loggedIn,
+      login: () => this.login(),
+      isHome: s.screen === "home",
+      isDetail: s.screen === "detail",
+      isAccount: s.screen === "account",
+      isJournal: s.screen === "journal",
+      isConcierge: s.screen === "concierge",
+      openTrip: () => this.goTo("detail"),
+      openLiveJournal: () => this.openJournal("live"),
+      openConcierge: () => this.goTo("concierge"),
+      backHome: () => this.goTo("home"),
+      goAccount: () => this.goTo("account"),
+      tripLinks: TRIP_LINKS,
+      pastTrips,
+      selectedJournal,
+      chatMessages,
+      isThinking: s.isThinking,
+      suggestedPrompts,
+      draftMessage: "Type a question\u2026",
+      sendMessage: () => {},
+    };
+  }
+}
+
+</script>
+</body>
+</html>

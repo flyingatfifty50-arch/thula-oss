@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link rel="stylesheet" href="_ds/thula-travel-design-system-e4d7566b-09e7-4eb9-8cfb-fa504a40e344/colors_and_type.css">
+  <link rel="stylesheet" href="_ds/thula-travel-design-system-e4d7566b-09e7-4eb9-8cfb-fa504a40e344/social/fonts-embed.css">
+  <link rel="stylesheet" href="_ds/thula-travel-design-system-e4d7566b-09e7-4eb9-8cfb-fa504a40e344/styles.css">
+  <script src="_ds/thula-travel-design-system-e4d7566b-09e7-4eb9-8cfb-fa504a40e344/_ds_bundle.js"></script>
+  <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.js"></script>
+  <style>
+    body{margin:0;background:var(--sand);}
+  </style>
+</helmet>
+
+<div style="max-width:420px;margin:0 auto;min-height:100vh;background:var(--paper);position:relative;font-family:var(--font-serif);box-shadow:0 0 60px rgba(30,36,28,0.12);--accent:#317653;--deep:#317653;--sage-600:#317653;--sage-700:#26593f;">
+
+  <div style="height:100vh;overflow-y:auto;padding-bottom:84px;">
+
+    <!-- ============ HOME ============ -->
+    <sc-if value="{{ isHome }}">
+      <div>
+        <div style="background:var(--deep);padding:40px 22px 30px;position:relative;overflow:hidden;">
+          <div style="position:relative;z-index:1;">
+            <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--secondary);margin:0 0 10px;">Thula Travel &middot; Private itinerary</p>
+            <h1 style="font-family:var(--font-script);font-weight:700;font-size:44px;color:var(--fg-on-dark);line-height:0.95;margin:0 0 12px;">{{ destinationLine1 }} <em style="color:var(--secondary);font-style:normal;">{{ destinationLine2 }}</em></h1>
+            <p style="color:rgba(251,244,233,0.78);font-size:13.5px;margin:0 0 22px;line-height:1.5;">{{ clientName }} &amp; group of {{ groupSize }} &middot; {{ dateRange }}</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <sc-for list="{{ homeStats }}" as="st" hint-placeholder-count="4">
+                <div style="background:rgba(251,244,233,0.12);border-radius:12px;padding:10px 14px;text-align:center;">
+                  <div style="font-family:var(--font-serif);font-size:20px;font-weight:700;color:var(--fg-on-dark);line-height:1;">{{ st.n }}</div>
+                  <div style="font-family:var(--font-serif);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(251,244,233,0.6);margin-top:4px;">{{ st.l }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <div style="padding:22px 20px 0;">
+          <div style="background:var(--card);border-radius:var(--r-lg);border:1px solid var(--line);padding:18px;box-shadow:var(--shadow-sm);margin-bottom:6px;">
+            <p style="color:var(--fg2);font-size:14px;line-height:1.7;margin:0 0 10px;">Everything for your {{ destinationLine1 }} {{ destinationLine2 }} trip in one place &mdash; open it from your phone wherever you are.</p>
+            <p style="color:var(--fg2);font-size:14px;line-height:1.7;margin:0 0 12px;">Cape Town, Big Five country at Addo, and the winelands of Franschhoek. If anything comes up, message me any time.</p>
+            <p style="font-family:var(--font-script);font-size:19px;color:var(--accent);margin:10px 0 2px;">{{ consultantName }}</p>
+            <p style="font-family:var(--font-serif);font-weight:600;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--fg3);margin:0;">Thula Travel</p>
+          </div>
+
+          <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent);margin:22px 0 10px;">Quick nav</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <sc-for list="{{ navTiles }}" as="t" hint-placeholder-count="6">
+              <button onClick="{{ t.go }}" style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:14px;text-align:left;cursor:pointer;position:relative;overflow:hidden;">
+                <div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:{{ t.color }};"></div>
+                <div style="color:{{ t.color }};margin-bottom:8px;"><x-import component-from-global-scope="Icon" name="{{ t.icon }}" size="22" hint-size="22px,22px"></x-import></div>
+                <span style="font-weight:700;font-size:14px;color:var(--fg1);display:block;">{{ t.label }}</span>
+                <span style="font-size:11px;color:var(--fg3);">{{ t.sub }}</span>
+              </button>
+            </sc-for>
+          </div>
+
+          <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent);margin:24px 0 10px;">Your journey at a glance</p>
+          <sc-for list="{{ journeyGlance }}" as="s" hint-placeholder-count="3">
+            <div style="background:var(--card);border-radius:var(--r-md);border:1px solid var(--line);padding:13px 15px;margin-bottom:8px;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden;">
+              <div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:{{ s.color }};"></div>
+              <div style="color:{{ s.color }};flex-shrink:0;"><x-import component-from-global-scope="Icon" name="{{ s.icon }}" size="24" hint-size="24px,24px"></x-import></div>
+              <div style="flex:1;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px;">
+                  <span style="font-weight:700;font-size:15px;color:var(--fg1);">{{ s.loc }}</span>
+                  <x-import component-from-global-scope="Pill" tone="{{ s.tone }}" hint-size="auto,24px">{{ s.nights }}</x-import>
+                </div>
+                <div style="font-size:12px;color:var(--fg3);">{{ s.hotel }}</div>
+                <div style="font-family:var(--font-serif);font-weight:600;font-size:11px;color:{{ s.color }};margin-top:3px;">{{ s.dates }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ============ FLIGHTS ============ -->
+    <sc-if value="{{ isFlights }}">
+      <div>
+        <div style="padding:26px 20px 0;">
+          <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin:0 0 4px;">Getting there &amp; around</p>
+          <h2 style="font-family:var(--font-serif);font-weight:600;font-size:26px;color:var(--fg1);margin:0 0 18px;line-height:1.1;">Flights</h2>
+        </div>
+        <div style="padding:0 20px 6px;display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px;">
+          <x-import component-from-global-scope="Pill" tone="sage" hint-size="auto,28px">Outbound</x-import>
+          <x-import component-from-global-scope="Pill" tone="amber" hint-size="auto,28px">Domestic</x-import>
+          <x-import component-from-global-scope="Pill" tone="plum" hint-size="auto,28px">Return</x-import>
+        </div>
+        <div style="padding:0 20px 28px;">
+          <sc-for list="{{ flights }}" as="f" hint-placeholder-count="6">
+            <div style="background:var(--card);border-radius:var(--r-md);border:1px solid var(--line);padding:15px;margin-bottom:10px;position:relative;overflow:hidden;box-shadow:var(--shadow-sm);">
+              <div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:{{ f.color }};"></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                <span style="font-family:var(--font-serif);font-weight:600;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--fg3);">{{ f.carrier }} &middot; {{ f.date }}</span>
+                <span style="font-family:var(--font-serif);font-size:12.5px;font-weight:700;color:{{ f.color }};background:var(--sand);padding:3px 9px;border-radius:8px;">{{ f.code }}</span>
+              </div>
+              <div style="display:flex;align-items:center;">
+                <div style="text-align:center;min-width:56px;">
+                  <div style="font-family:var(--font-serif);font-size:23px;font-weight:700;color:var(--fg1);line-height:1;">{{ f.from }}</div>
+                  <div style="font-size:10px;color:var(--fg3);">{{ f.fromCity }}</div>
+                </div>
+                <div style="flex:1;display:flex;align-items:center;padding:0 10px;">
+                  <div style="flex:1;height:1px;background:var(--line);"></div>
+                  <div style="color:var(--primary);margin:0 6px;"><x-import component-from-global-scope="Icon" name="plane" size="16" hint-size="16px,16px"></x-import></div>
+                  <div style="flex:1;height:1px;background:var(--line);"></div>
+                </div>
+                <div style="text-align:center;min-width:56px;">
+                  <div style="font-family:var(--font-serif);font-size:23px;font-weight:700;color:var(--fg1);line-height:1;">{{ f.to }}</div>
+                  <div style="font-size:10px;color:var(--fg3);">{{ f.toCity }}</div>
+                </div>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);">
+                <div><span style="font-family:var(--font-serif);font-weight:600;font-size:9.5px;text-transform:uppercase;letter-spacing:0.1em;color:var(--fg3);display:block;">Departs</span><b style="font-size:14px;color:var(--fg1);">{{ f.dep }}</b></div>
+                <div style="text-align:right;"><span style="font-family:var(--font-serif);font-weight:600;font-size:9.5px;text-transform:uppercase;letter-spacing:0.1em;color:var(--fg3);display:block;">Arrives</span><b style="font-size:14px;color:var(--fg1);">{{ f.arr }}</b></div>
+              </div>
+            </div>
+          </sc-for>
+          <div style="background:var(--amber-100);border-radius:var(--r-md);padding:14px 16px;border:1px solid var(--amber-300);">
+            <p style="font-family:var(--font-serif);font-weight:700;font-size:10.5px;text-transform:uppercase;letter-spacing:0.12em;color:var(--amber-600);margin:0 0 8px;">Booking refs</p>
+            <div style="font-size:13px;color:var(--fg1);line-height:1.9;">
+              <div>Turkish Airlines (8 pax) <b>SVIHB7</b></div>
+              <div>Linda &amp; Rachel <b>SZLHXR</b></div>
+              <div style="margin-top:8px;color:var(--fg2);font-size:12px;">23 kg checked bag per person &middot; all flights included</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ============ HOTELS ============ -->
+    <sc-if value="{{ isHotels }}">
+      <div>
+        <div style="padding:26px 20px 0;">
+          <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin:0 0 4px;">Where you'll stay</p>
+          <h2 style="font-family:var(--font-serif);font-weight:600;font-size:26px;color:var(--fg1);margin:0 0 18px;line-height:1.1;">Hotels</h2>
+        </div>
+        <div style="padding:0 20px 28px;">
+          <sc-for list="{{ hotels }}" as="h" hint-placeholder-count="3">
+            <div style="background:var(--card);border-radius:var(--r-lg);border:1px solid var(--line);margin-bottom:20px;overflow:hidden;box-shadow:var(--shadow-md);">
+              <div style="position:relative;height:160px;overflow:hidden;background:{{ h.gradient }};">
+                <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(31,30,26,0.55));"></div>
+                <div style="position:absolute;top:12px;left:12px;background:rgba(31,30,26,0.75);backdrop-filter:blur(4px);border-radius:20px;padding:5px 12px;">
+                  <span style="font-family:var(--font-serif);font-weight:600;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-on-dark);">{{ h.dates }}</span>
+                </div>
+              </div>
+              <div style="padding:16px 18px;">
+                <p style="font-family:var(--font-serif);font-weight:600;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:{{ h.color }};margin:0 0 3px;">{{ h.loc }}</p>
+                <h3 style="font-family:var(--font-serif);font-weight:600;font-size:19px;color:var(--fg1);margin:0 0 3px;">{{ h.name }}</h3>
+                <p style="font-size:11.5px;color:var(--fg3);margin:0 0 10px;">{{ h.board }}</p>
+                <p style="font-size:13.5px;color:var(--fg2);line-height:1.6;margin:0 0 12px;">{{ h.desc }}</p>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;">
+                  <sc-for list="{{ h.tags }}" as="tg" hint-placeholder-count="3">
+                    <x-import component-from-global-scope="Pill" tone="{{ h.tone }}" hint-size="auto,26px">{{ tg }}</x-import>
+                  </sc-for>
+                </div>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                  <a href="{{ h.url }}" target="_blank" rel="noopener" style="flex:1;display:block;background:var(--primary);color:var(--fg-on-clay);text-align:center;padding:11px 0;border-radius:var(--r-pill);font-size:13.5px;font-weight:600;text-decoration:none;min-width:110px;">Website &#8599;</a>
+                  <sc-if value="{{ h.confKey }}">
+                    <button onClick="{{ h.openConf }}" style="flex:1;background:transparent;border:1.5px solid {{ h.color }};color:{{ h.color }};border-radius:var(--r-pill);padding:11px 0;font-size:13.5px;font-weight:600;cursor:pointer;min-width:110px;display:flex;align-items:center;justify-content:center;gap:6px;">
+                      <x-import component-from-global-scope="Icon" name="mail" size="15" hint-size="15px,15px"></x-import> Confirmation
+                    </button>
+                  </sc-if>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ============ TRANSFERS ============ -->
+    <sc-if value="{{ isTransfers }}">
+      <div>
+        <div style="padding:26px 20px 0;">
+          <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin:0 0 4px;">Ground transport</p>
+          <h2 style="font-family:var(--font-serif);font-weight:600;font-size:26px;color:var(--fg1);margin:0 0 18px;line-height:1.1;">Transfers &amp; tours</h2>
+        </div>
+        <div style="padding:0 20px 4px;">
+          <div style="background:var(--sage-100);border:1px solid var(--sage-300);border-radius:var(--r-md);padding:12px 14px;margin-bottom:16px;font-size:13px;color:var(--fg2);line-height:1.6;">
+            All transfers are pre-booked and included in your package unless noted. Tap any card for full details.
+          </div>
+        </div>
+        <div style="padding:0 20px 28px;">
+          <sc-for list="{{ transfersList }}" as="t" hint-placeholder-count="12">
+            <div style="background:var(--card);border-radius:var(--r-md);border:1px solid var(--line);margin-bottom:10px;overflow:hidden;box-shadow:var(--shadow-sm);">
+              <button onClick="{{ t.toggle }}" style="width:100%;background:none;border:none;cursor:pointer;padding:13px 15px;display:flex;align-items:flex-start;gap:12px;text-align:left;">
+                <div style="width:40px;height:40px;border-radius:10px;background:var(--sand);border:1.5px solid {{ t.color }};display:flex;align-items:center;justify-content:center;color:{{ t.color }};flex-shrink:0;">
+                  <x-import component-from-global-scope="Icon" name="{{ t.icon }}" size="18" hint-size="18px,18px"></x-import>
+                </div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-family:var(--font-serif);font-weight:600;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:{{ t.color }};margin-bottom:2px;">{{ t.date }}</div>
+                  <div style="font-weight:700;font-size:14px;color:var(--fg1);margin-bottom:3px;">{{ t.title }}</div>
+                  <div style="font-size:12px;color:var(--fg3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ t.from }} &rarr; {{ t.to }}</div>
+                  <div style="font-family:var(--font-serif);font-size:10.5px;color:var(--fg3);margin-top:3px;">{{ t.ref }}</div>
+                </div>
+                <span style="color:var(--fg3);font-size:18px;flex-shrink:0;margin-top:2px;">{{ t.chevron }}</span>
+              </button>
+              <sc-if value="{{ t.isOpen }}">
+                <div style="padding:0 15px 15px;border-top:1px solid var(--line);">
+                  <p style="font-size:13px;color:var(--fg2);line-height:1.65;margin:12px 0 10px;">{{ t.detail }}</p>
+                  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+                    <x-import component-from-global-scope="Pill" tone="{{ t.tone }}" hint-size="auto,26px">{{ t.op }}</x-import>
+                    <sc-if value="{{ t.confKey }}">
+                      <button onClick="{{ t.openConf }}" style="background:var(--accent);color:var(--fg-on-dark);border:none;border-radius:var(--r-pill);padding:6px 14px;font-size:11.5px;font-weight:600;cursor:pointer;letter-spacing:0.03em;display:inline-flex;align-items:center;gap:6px;">
+                        <x-import component-from-global-scope="Icon" name="mail" size="13" hint-size="13px,13px"></x-import> View confirmation
+                      </button>
+                    </sc-if>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ============ ITINERARY ============ -->
+    <sc-if value="{{ isItinerary }}">
+      <div>
+        <div style="padding:26px 20px 0;">
+          <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin:0 0 4px;">Your journey, day by day</p>
+          <h2 style="font-family:var(--font-serif);font-weight:600;font-size:26px;color:var(--fg1);margin:0 0 18px;line-height:1.1;">Itinerary</h2>
+        </div>
+        <div style="padding:0 20px 28px;">
+          <sc-for list="{{ itinerary }}" as="d" hint-placeholder-count="12">
+            <div style="background:var(--card);border-radius:var(--r-md);border:1px solid var(--line);margin-bottom:10px;overflow:hidden;box-shadow:var(--shadow-sm);">
+              <button onClick="{{ d.toggle }}" style="width:100%;background:none;border:none;cursor:pointer;padding:13px 15px;display:flex;align-items:center;gap:12px;text-align:left;">
+                <div style="width:44px;height:44px;border-radius:12px;background:var(--sand);border:1.5px solid {{ d.color }};display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;">
+                  <span style="font-family:var(--font-serif);font-size:16px;font-weight:700;color:{{ d.color }};line-height:1;">{{ d.n }}</span>
+                </div>
+                <div style="flex:1;">
+                  <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px;flex-wrap:wrap;">
+                    <x-import component-from-global-scope="Pill" tone="{{ d.tone }}" hint-size="auto,24px">{{ d.tag }}</x-import>
+                    <span style="font-family:var(--font-serif);font-size:10.5px;color:var(--fg3);">{{ d.date }}</span>
+                  </div>
+                  <span style="font-weight:700;font-size:14px;color:var(--fg1);">{{ d.title }}</span>
+                </div>
+                <span style="color:var(--fg3);font-size:18px;flex-shrink:0;">{{ d.chevron }}</span>
+              </button>
+              <sc-if value="{{ d.isOpen }}">
+                <div style="padding:0 15px 15px;border-top:1px solid var(--line);">
+                  <p style="color:var(--fg2);font-size:13px;line-height:1.65;margin:12px 0 0;">{{ d.body }}</p>
+                  <sc-if value="{{ d.hasTl }}">
+                    <div style="margin-top:14px;border-left:2px solid var(--line);padding-left:14px;">
+                      <sc-for list="{{ d.tl }}" as="tl" hint-placeholder-count="6">
+                        <div style="display:flex;gap:10px;padding:5px 0;position:relative;">
+                          <div style="position:absolute;left:-19px;top:9px;width:8px;height:8px;border-radius:50%;background:var(--secondary);border:2px solid var(--card);"></div>
+                          <span style="font-size:11px;color:{{ d.color }};font-weight:600;min-width:44px;">{{ tl.time }}</span>
+                          <span style="font-size:13px;color:var(--fg1);">{{ tl.text }}</span>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ============ TIPS ============ -->
+    <sc-if value="{{ isTips }}">
+      <div>
+        <div style="padding:26px 20px 0;">
+          <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin:0 0 4px;">From us to you</p>
+          <h2 style="font-family:var(--font-serif);font-weight:600;font-size:26px;color:var(--fg1);margin:0 0 18px;line-height:1.1;">Thula tips</h2>
+        </div>
+        <div style="padding:0 20px 4px;">
+          <sc-for list="{{ tips }}" as="t" hint-placeholder-count="9">
+            <div style="background:var(--card);border-radius:var(--r-md);border:1px solid var(--line);padding:13px 15px;margin-bottom:9px;display:flex;gap:12px;position:relative;overflow:hidden;box-shadow:var(--shadow-sm);">
+              <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:{{ t.color }};opacity:0.5;"></div>
+              <div style="color:{{ t.color }};flex-shrink:0;"><x-import component-from-global-scope="Icon" name="{{ t.icon }}" size="21" hint-size="21px,21px"></x-import></div>
+              <div>
+                <h4 style="font-weight:700;font-size:14px;color:var(--fg1);margin:0 0 4px;">{{ t.title }}</h4>
+                <p style="font-size:13px;color:var(--fg2);margin:0;line-height:1.6;">{{ t.body }}</p>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="padding:8px 20px 28px;">
+          <button onClick="{{ togglePack }}" style="width:100%;background:var(--accent);color:var(--fg-on-dark);border:none;border-radius:var(--r-md);padding:14px 18px;font-size:15px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center;">
+            <span style="display:flex;align-items:center;gap:10px;"><x-import component-from-global-scope="Icon" name="luggage" size="19" hint-size="19px,19px"></x-import> Packing list</span>
+            <span style="font-size:18px;">{{ packChevron }}</span>
+          </button>
+          <sc-if value="{{ packOpen }}">
+            <div style="background:var(--card);border-radius:0 0 var(--r-md) var(--r-md);border:1px solid var(--line);border-top:none;padding:16px;">
+              <sc-for list="{{ packing }}" as="cat" hint-placeholder-count="4">
+                <div style="margin-bottom:18px;">
+                  <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:{{ cat.color }};margin:0 0 8px;border-bottom:2px solid var(--secondary);padding-bottom:4px;display:flex;align-items:center;gap:8px;">
+                    <x-import component-from-global-scope="Icon" name="{{ cat.icon }}" size="15" hint-size="15px,15px"></x-import>{{ cat.name }}
+                  </p>
+                  <sc-for list="{{ cat.items }}" as="item" hint-placeholder-count="5">
+                    <div onClick="{{ item.toggle }}" style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--line-soft);font-size:13px;color:{{ item.textColor }};cursor:pointer;text-decoration:{{ item.strike }};">
+                      <div style="width:18px;height:18px;border:1.5px solid {{ item.boxBorder }};border-radius:5px;flex-shrink:0;background:{{ item.boxBg }};display:flex;align-items:center;justify-content:center;">
+                        <sc-if value="{{ item.checked }}"><span style="font-size:11px;color:var(--fg-on-clay);">&#10003;</span></sc-if>
+                      </div>
+                      {{ item.text }}
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-for>
+              <button onClick="{{ resetPacking }}" style="width:100%;margin-top:6px;background:transparent;border:1px solid var(--line);border-radius:var(--r-sm);padding:9px;font-size:12px;color:var(--fg3);cursor:pointer;">Reset all</button>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ============ EMERGENCY ============ -->
+    <sc-if value="{{ isEmergency }}">
+      <div>
+        <div style="background:var(--clay-700);padding:28px 20px 24px;position:relative;overflow:hidden;">
+          <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--clay-200);margin:0 0 6px;">Important</p>
+          <h2 style="font-family:var(--font-serif);font-weight:600;font-size:25px;color:#fff;margin:0 0 8px;">Emergency &amp; key contacts</h2>
+          <p style="font-size:13px;color:rgba(255,255,255,0.8);margin:0;">All numbers, refs and health info in one place. Share this screen with your group.</p>
+        </div>
+
+        <div style="padding:20px 20px 0;">
+          <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin:0 0 10px;">Key contacts</p>
+          <sc-for list="{{ contacts }}" as="c" hint-placeholder-count="9">
+            <div style="background:var(--card);border-radius:var(--r-md);border:1px solid var(--line);padding:13px 15px;margin-bottom:9px;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden;box-shadow:var(--shadow-sm);">
+              <div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:{{ c.color }};"></div>
+              <div style="color:{{ c.color }};flex-shrink:0;"><x-import component-from-global-scope="Icon" name="{{ c.icon }}" size="21" hint-size="21px,21px"></x-import></div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-weight:700;font-size:14px;color:var(--fg1);">{{ c.label }}</div>
+                <div style="font-size:11px;color:var(--fg3);margin-bottom:3px;">{{ c.sub }}</div>
+                <div style="font-size:13px;color:{{ c.color }};font-weight:600;">{{ c.num }}</div>
+              </div>
+              <button onClick="{{ c.copy }}" style="background:{{ c.copyBg }};border:1px solid {{ c.color }};border-radius:var(--r-sm);padding:7px 12px;font-size:11px;font-weight:600;color:{{ c.copyFg }};cursor:pointer;flex-shrink:0;">{{ c.copyLabel }}</button>
+            </div>
+          </sc-for>
+
+          <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin:20px 0 10px;">Flight &amp; transfer references</p>
+          <sc-for list="{{ docs }}" as="d" hint-placeholder-count="9">
+            <div style="background:var(--card);border-radius:var(--r-sm);border:1px solid var(--line);padding:11px 14px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
+              <div>
+                <div style="font-size:12px;color:var(--fg3);margin-bottom:2px;">{{ d.label }}</div>
+                <div style="font-size:13.5px;font-weight:700;color:{{ d.color }};">{{ d.val }}</div>
+              </div>
+              <button onClick="{{ d.copy }}" style="background:{{ d.copyBg }};border:1px solid {{ d.color }};border-radius:8px;padding:6px 12px;font-size:11px;font-weight:600;color:{{ d.copyFg }};cursor:pointer;flex-shrink:0;">{{ d.copyLabel }}</button>
+            </div>
+          </sc-for>
+
+          <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin:20px 0 10px;">Health &amp; safety</p>
+          <div style="background:var(--card);border-radius:var(--r-md);border:1px solid var(--line);padding:14px 16px;margin-bottom:28px;">
+            <sc-for list="{{ health }}" as="h" hint-placeholder-count="8">
+              <div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--line-soft);font-size:13px;color:var(--fg1);line-height:1.5;align-items:flex-start;">
+                <span style="flex-shrink:0;color:var(--accent);"><x-import component-from-global-scope="Icon" name="{{ h.icon }}" size="16" hint-size="16px,16px"></x-import></span>
+                <span>{{ h.text }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ============ CONCIERGE ============ -->
+    <sc-if value="{{ isConcierge }}">
+      <div style="display:flex;flex-direction:column;height:calc(100vh - 84px);">
+        <div style="padding:22px 20px 12px;">
+          <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin:0 0 4px;">Your Thula concierge</p>
+          <h2 style="font-family:var(--font-serif);font-weight:600;font-size:22px;color:var(--fg1);margin:0;">Ask me anything</h2>
+          <p style="font-size:12.5px;color:var(--fg3);margin:6px 0 0;">Restaurants, safety, what to wear, local know-how &mdash; day or night, while you're away.</p>
+        </div>
+
+        <div style="flex:1;overflow-y:auto;padding:14px 20px;display:flex;flex-direction:column;gap:12px;">
+          <sc-for list="{{ chatMessages }}" as="m" hint-placeholder-count="3">
+            <div style="display:flex;{{ m.rowStyle }}">
+              <div style="max-width:82%;background:{{ m.bg }};color:{{ m.color }};border-radius:{{ m.radius }};padding:11px 15px;font-size:13.5px;line-height:1.55;white-space:pre-wrap;">{{ m.text }}</div>
+            </div>
+          </sc-for>
+          <sc-if value="{{ isThinking }}">
+            <div style="display:flex;justify-content:flex-start;">
+              <div style="background:var(--sand);border-radius:16px 16px 16px 4px;padding:11px 15px;font-size:13.5px;color:var(--fg3);">Thinking&hellip;</div>
+            </div>
+          </sc-if>
+        </div>
+
+        <div style="padding:10px 20px 20px;border-top:1px solid var(--line);">
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;">
+            <sc-for list="{{ suggestedPrompts }}" as="sp" hint-placeholder-count="3">
+              <button onClick="{{ sp.ask }}" style="background:var(--sage-100);border:1px solid var(--sage-300);color:var(--accent);font-size:11.5px;font-weight:600;padding:6px 11px;border-radius:var(--r-pill);cursor:pointer;">{{ sp.label }}</button>
+            </sc-for>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <div style="flex:1;border:1.5px solid var(--line);border-radius:var(--r-pill);padding:10px 15px;font-size:13px;color:var(--fg3);">Type a question&hellip;</div>
+            <button style="background:var(--primary);color:#fff;border:none;border-radius:50%;width:38px;height:38px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;"><x-import component-from-global-scope="Icon" name="arrow-up" size="16" hint-size="16px,16px"></x-import></button>
+          </div>
+          <a href="https://chatgpt.com/g/g-p-68f0c28c45688191ba31189e2a5f9cc8-thulagpt/project" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:6px;margin-top:12px;font-size:11.5px;color:var(--fg3);text-decoration:none;"><x-import component-from-global-scope="Icon" name="external-link" size="12" hint-size="12px,12px"></x-import>Prefer ThulaGPT directly? Open it here</a>
+        </div>
+      </div>
+    </sc-if>
+
+  </div>
+
+  <!-- ============ BOTTOM TAB BAR ============ -->
+  <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(255,253,248,0.97);backdrop-filter:blur(12px);border-top:1px solid var(--line);">
+    <div style="display:flex;justify-content:space-around;padding:8px 4px 10px;overflow-x:auto;">
+      <sc-for list="{{ tabs }}" as="tb" hint-placeholder-count="7">
+        <button onClick="{{ tb.go }}" style="background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 6px;border-radius:10px;flex-shrink:0;color:{{ tb.color }};">
+          <x-import component-from-global-scope="Icon" name="{{ tb.icon }}" size="{{ tb.size }}" hint-size="20px,20px"></x-import>
+          <span style="font-family:var(--font-serif);font-size:9px;letter-spacing:0.04em;color:{{ tb.color }};font-weight:{{ tb.weight }};white-space:nowrap;">{{ tb.label }}</span>
+          <sc-if value="{{ tb.active }}"><div style="width:16px;height:2.5px;background:var(--primary);border-radius:2px;"></div></sc-if>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- ============ CONFIRMATION MODAL ============ -->
+  <sc-if value="{{ modalOpen }}">
+    <div onClick="{{ closeModal }}" style="position:fixed;inset:0;z-index:200;background:rgba(31,30,26,0.65);backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center;">
+      <div onClick="{{ stopProp }}" style="background:var(--card);border-radius:24px 24px 0 0;width:100%;max-width:420px;max-height:85vh;overflow-y:auto;padding:24px 20px 40px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
+          <div>
+            <p style="font-family:var(--font-serif);font-weight:600;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin:0 0 4px;">Booking confirmation</p>
+            <h3 style="font-family:var(--font-serif);font-weight:600;font-size:18px;color:var(--fg1);margin:0;line-height:1.2;">{{ activeModal.title }}</h3>
+          </div>
+          <button onClick="{{ closeModal }}" style="background:var(--sage-100);border:none;border-radius:20px;width:32px;height:32px;cursor:pointer;color:var(--fg1);flex-shrink:0;margin-left:12px;">&times;</button>
+        </div>
+        <sc-for list="{{ activeModal.trips }}" as="tr" hint-placeholder-count="2">
+          <div style="background:var(--sage-100);border-radius:var(--r-md);padding:14px 16px;margin:14px 0;border:1px solid var(--sage-300);">
+            <p style="font-family:var(--font-serif);font-weight:700;font-size:11px;color:var(--sage-700);margin:0 0 10px;text-transform:uppercase;letter-spacing:0.08em;">{{ tr.label }}</p>
+            <sc-for list="{{ tr.details }}" as="dt" hint-placeholder-count="4">
+              <div style="display:flex;gap:8px;padding:5px 0;border-bottom:1px solid var(--sage-300);font-size:13px;color:var(--fg1);align-items:flex-start;">
+                <span style="color:var(--accent);flex-shrink:0;">&rsaquo;</span>
+                <span>{{ dt }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </sc-for>
+        <div style="background:var(--amber-100);border-radius:var(--r-md);padding:12px 14px;margin-top:14px;border:1px solid var(--amber-300);">
+          <p style="font-family:var(--font-serif);font-weight:700;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber-600);margin:0 0 5px;">Supplier contact</p>
+          <p style="font-size:13px;color:var(--fg1);margin:0;line-height:1.6;"><b>{{ activeModal.supplier }}</b><br/>{{ activeModal.contact }}</p>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+// ── SHELL TEMPLATE NOTE ──────────────────────────────────────────────
+// This is a per-client "trip companion" app. To spin up a new client:
+//   1. Edit TRIP below (client name, destination, dates, consultant).
+//   2. Replace FLIGHTS_DATA / HOTELS_DATA / TRANSFERS_DATA / ITINERARY_DATA
+//      / TIPS_DATA / PACKING_DATA / CONTACTS_DATA / DOCS_DATA / HEALTH_DATA
+//      / CONFIRMATIONS with the new trip's facts (same shape).
+//   3. homeStats / navTiles / journeyGlance derive automatically in renderVals.
+// Everything else (layout, interactions, styling) stays as-is.
+// ───────────────────────────────────────────────────────────────────
+
+const TRIP = {
+  client: "Brid Walsh",
+  groupSize: 10,
+  destinationLine1: "South",
+  destinationLine2: "Africa",
+  dateRange: "25 Jun \u2013 7 Jul 2026",
+  consultant: "Gillian",
+  nights: 10,
+  destinationsCount: 3,
+  departureDate: "25 Jun",
+};
+
+const TABS_DEF = [
+  {id:"home",label:"Home",icon:"home"},
+  {id:"flights",label:"Flights",icon:"plane"},
+  {id:"hotels",label:"Hotels",icon:"bed-double"},
+  {id:"transfers",label:"Transfers",icon:"bus"},
+  {id:"itinerary",label:"Plan",icon:"calendar-days"},
+  {id:"concierge",label:"Ask Thula",icon:"sparkles"},
+  {id:"tips",label:"Tips",icon:"lightbulb"},
+  {id:"emergency",label:"SOS",icon:"life-buoy"},
+];
+
+const SUGGESTED_PROMPTS = [
+  "Good dinner near Franschhoek tonight?",
+  "Is it safe to walk in Sea Point at night?",
+  "What should I wear on the safari drive?",
+];
+
+// Canned demo answers standing in for the live ThulaGPT integration.
+// ThulaGPT lives at: https://chatgpt.com/g/g-p-68f0c28c45688191ba31189e2a5f9cc8-thulagpt/project
+// That's a ChatGPT "project" URL, built for a logged-in human in the ChatGPT
+// UI — it has no public API endpoint, so this in-app chat can't call it
+// directly from client-side code. Two real integration paths:
+//  1) Recreate ThulaGPT's system prompt/knowledge as a call to the OpenAI
+//     Assistants/Chat Completions API (or Claude) from a small backend,
+//     passing this trip's context (dates, destinations, hotel, itinerary)
+//     each turn so answers stay trip-specific.
+//  2) Keep ThulaGPT as-is and deep-link out to it (done below) for
+//     clients happy to use ChatGPT directly.
+// Until wired to a real model, runFakeConcierge() below stands in.
+const CANNED_ANSWERS = [
+  {match: /dinner|restaurant|eat|food/i, reply: "For tonight, book Foliage or Reuben's in Franschhoek \u2014 both walkable from Centre-Ville. Ask for the terrace table if it's clear.\n\nWant me to have Gillian call ahead and book it for you?"},
+  {match: /safe|safety|walk/i, reply: "Sea Point's Beach Road is well-lit and busy even after dark, so it's generally fine. Stick to the main promenade rather than side streets, and keep valuables out of sight in the car."},
+  {match: /wear|pack|clothes|cold/i, reply: "Mornings at Addo are properly cold \u2014 layer up, you'll be glad of a fleece and gloves in the open safari vehicle. It warms quickly by mid-morning."},
+  {match: /whale|wildlife|animal/i, reply: "Great timing \u2014 whale season's just starting. Keep an eye on the water during the Chapman's Peak drive."},
+];
+function runFakeConcierge(question) {
+  const hit = CANNED_ANSWERS.find(a => a.match.test(question));
+  return hit ? hit.reply : "Great question \u2014 I'll check with your local guide and get back to you shortly. Anything urgent is best sent straight to Gillian via WhatsApp.";
+}
+
+const NAV_TILES_DEF = [
+  {id:"flights",icon:"plane",label:"Flights",sub:"6 flights \u00b7 2 airlines",color:"var(--accent)"},
+  {id:"hotels",icon:"bed-double",label:"Hotels",sub:"3 properties",color:"var(--primary)"},
+  {id:"itinerary",icon:"calendar-days",label:"Itinerary",sub:"12 days \u00b7 day by day",color:"var(--secondary)"},
+  {id:"transfers",icon:"bus",label:"Transfers",sub:"All ground transport",color:"var(--accent-2)"},
+  {id:"tips",icon:"lightbulb",label:"Tips &amp; packing",sub:"9 tips \u00b7 packing list",color:"var(--clay-600)"},
+  {id:"emergency",icon:"life-buoy",label:"Emergency",sub:"Key contacts &amp; docs",color:"var(--primary)"},
+];
+
+const JOURNEY_GLANCE_DEF = [
+  {icon:"waves",tone:"sage",color:"var(--accent)",loc:"Cape Town",nights:"5 nights",dates:"26 Jun \u2013 1 Jul",hotel:"The Bantry Aparthotel"},
+  {icon:"map-pin",tone:"clay",color:"var(--primary)",loc:"Addo",nights:"2 nights",dates:"1\u20133 Jul",hotel:"Bellevue Forest Lodge"},
+  {icon:"grape",tone:"amber",color:"var(--amber-600)",loc:"Franschhoek",nights:"3 nights",dates:"3\u20136 Jul",hotel:"Centre-Ville Guest House"},
+];
+
+const FLIGHTS_DATA = [
+  {carrier:"Turkish Airlines",date:"Thu 25 Jun",code:"TK1978",from:"DUB",fromCity:"Dublin",to:"IST",toCity:"Istanbul",dep:"17:05",arr:"23:30",color:"var(--accent)"},
+  {carrier:"Turkish Airlines",date:"Fri 26 Jun",code:"TK0044",from:"IST",fromCity:"Istanbul",to:"CPT",toCity:"Cape Town",dep:"01:45",arr:"11:50",color:"var(--accent)"},
+  {carrier:"Safair",date:"Wed 1 Jul",code:"FA0136",from:"CPT",fromCity:"Cape Town",to:"PLZ",toCity:"Gqeberha",dep:"06:05",arr:"07:25",color:"var(--secondary)"},
+  {carrier:"Safair",date:"Fri 3 Jul",code:"FA0031",from:"PLZ",fromCity:"Gqeberha",to:"CPT",toCity:"Cape Town",dep:"14:30",arr:"15:55",color:"var(--secondary)"},
+  {carrier:"Turkish Airlines",date:"Mon 6 Jul",code:"TK0045",from:"CPT",fromCity:"Cape Town",to:"IST",toCity:"Istanbul",dep:"16:40",arr:"+1 04:35",color:"var(--accent-2)"},
+  {carrier:"Turkish Airlines",date:"Tue 7 Jul",code:"TK1975",from:"IST",fromCity:"Istanbul",to:"DUB",toCity:"Dublin",dep:"07:00",arr:"09:35",color:"var(--accent-2)"},
+];
+
+const HOTELS_DATA = [
+  {name:"The Bantry Aparthotel",loc:"Cape Town \u00b7 Western Cape",dates:"26 Jun \u2013 1 Jul \u00b7 5 nights",board:"Breakfast included \u00b7 5 \u00d7 Double Rooms",desc:"Your base beneath Table Mountain, well placed for the city, the Atlantic seaboard and the peninsula drives.",url:"https://www.bantryaparthotel.co.za",gradient:"var(--fig-fynbos)",color:"var(--accent)",tone:"sage",tags:["Pool","City access","Breakfast"],confKey:"tropicana"},
+  {name:"Bellevue Forest Lodge",loc:"Addo \u00b7 Eastern Cape",dates:"1 Jul \u2013 3 Jul \u00b7 2 nights",board:"Dinner & Breakfast \u00b7 5 \u00d7 Luxury Tents",desc:"Malaria-free Big Five country with game drives from the doorstep and dinner under the stars.",url:"https://bellevueforest.co.za",gradient:"var(--fig-savanna)",color:"var(--primary)",tone:"clay",tags:["Big 5","Game drives","All meals"],confKey:null},
+  {name:"Centre-Ville Guest House",loc:"Franschhoek \u00b7 Cape Winelands",dates:"3 Jul \u2013 6 Jul \u00b7 3 nights",board:"Breakfast included \u00b7 5 \u00d7 Double / Twin",desc:"In the heart of the prettiest village in the Cape, walking distance to restaurants, galleries and the wine tram.",url:"https://www.centre-ville.co.za",gradient:"var(--fig-sunset)",color:"var(--amber-600)",tone:"amber",tags:["Wine tram","Village centre","Mountain views"],confKey:"centreVille"},
+];
+
+const TRANSFERS_DATA = [
+  {icon:"bus",title:"Airport arrival transfer",date:"Fri 26 Jun \u00b7 12:00",from:"Cape Town International",to:"The Bantry Aparthotel, Sea Point",ref:"EZ Shuttle #1967680",op:"EZ Shuttle",tone:"sage",color:"var(--accent)",detail:"Private minibus for 10 passengers. Driver will meet you in arrivals holding a Thula Travel board. Drop-off directly at the hotel. Estimated journey: 25 minutes.",confKey:"ez1967680"},
+  {icon:"bus-front",title:"City Sightseeing hop-on hop-off",date:"Sat 27 Jun \u00b7 all day",from:"Cape Town city",to:"All major stops",ref:"Ref FWTGDJ25 \u00b7 9 adults + 1 junior",op:"City Sightseeing",tone:"plum",color:"var(--accent-2)",detail:"Classic Hop-on-Hop-off Ticket. Ref: FWTGDJ25. 9 adults + 1 junior. Lead guest: Brid Walsh. Board at any stop and ride all day. Key stops: V&A Waterfront, Bo-Kaap, Signal Hill, Camps Bay, Sea Point.",confKey:"citysightseeing"},
+  {icon:"car",title:"Cape Peninsula road trip",date:"Sun 28 Jun \u00b7 08:00",from:"The Bantry Aparthotel",to:"Table Mountain (return)",ref:"Thula Travel tour",op:"Private guide",tone:"clay",color:"var(--primary)",detail:"Full-day private coach with dedicated guide for all 10 guests. Chapman's Peak, Cape Point, Boulders Beach, Table Mountain cable car. Packed lunch included.",confKey:"kiffkombi"},
+  {icon:"car",title:"Urban Safari tour",date:"Mon 29 Jun \u00b7 08:30",from:"The Bantry Aparthotel",to:"Various city stops (return)",ref:"Thula Travel tour",op:"Private guide",tone:"clay",color:"var(--primary)",detail:"Full-day private guide and vehicle. Robben Island ferry, Bo-Kaap, District Six Museum, Woodstock, V&A Waterfront cruise. Lunch at Salt River Taproom.",confKey:"kiffkombi"},
+  {icon:"plane",title:"CPT \u2192 Gqeberha transfer",date:"Wed 1 Jul \u00b7 04:30",from:"The Bantry Aparthotel",to:"Cape Town International",ref:"EZ Shuttle #1967680",op:"EZ Shuttle",tone:"amber",color:"var(--secondary)",detail:"Early morning shuttle for 10 guests. Pickup at 04:30 to allow time for check-in before the 06:05 Safair flight FA0136. Driver confirmed.",confKey:"ez1967680"},
+  {icon:"car",title:"Gqeberha \u2192 Bellevue Lodge",date:"Wed 1 Jul \u00b7 07:45",from:"Gqeberha Airport (PLZ)",to:"Bellevue Forest Lodge, Addo",ref:"Lodge transfer",op:"Bellevue Forest Lodge",tone:"clay",color:"var(--primary)",detail:"Lodge vehicle meets you on arrival. Journey approx 1 hour 15 minutes through the Eastern Cape. Scenic drive \u2014 keep an eye out for game near the road.",confKey:null},
+  {icon:"car",title:"Bellevue \u2192 Gqeberha Airport",date:"Fri 3 Jul \u00b7 12:30",from:"Bellevue Forest Lodge",to:"Gqeberha Airport (PLZ)",ref:"Lodge transfer",op:"Bellevue Forest Lodge",tone:"clay",color:"var(--primary)",detail:"Lodge vehicle for return journey. Departs 12:30 to arrive in good time for the 14:30 Safair flight FA0031.",confKey:null},
+  {icon:"bus",title:"CPT Airport \u2192 Franschhoek",date:"Fri 3 Jul \u00b7 15:55",from:"Cape Town International",to:"Centre-Ville Guest House",ref:"EZ Shuttle #1967681",op:"EZ Shuttle",tone:"amber",color:"var(--secondary)",detail:"Comfort Minibus (13 pax) with trailer. Meets you after FA0031 lands at 15:55. Drop-off at Centre-Ville Guest House, Franschhoek. Journey approx 1 hour through the winelands.",confKey:"ez1967681"},
+  {icon:"train-front",title:"Franschhoek Wine Tram",date:"Sat 4 Jul \u00b7 10:05 departure",from:"Franschhoek Terminal",to:"Orange Line wine estates",ref:"Wine Tram #8A43-FDE5",op:"Franschhoek Wine Tram",tone:"blush",color:"var(--clay-600)",detail:"Orange Line. Lead guest: Brid Walsh. 9 adults + 1 child. Departs Franschhoek Terminal 10:05 \u2014 arrive 15 mins early. Book estate restaurant lunches in advance. No BYO food or drink on estates.",confKey:"winetram"},
+  {icon:"car",title:"Tuk-tuk wine tour",date:"Sun 5 Jul \u00b7 10:00",from:"Centre-Ville Guest House",to:"Valley estates (return)",ref:"Thula Travel tour",op:"Local operator",tone:"blush",color:"var(--clay-600)",detail:"Full-day guided tuk-tuk tour visiting hand-picked estates in the Franschhoek valley. Includes curated tasting at each stop and a winelands lunch.",confKey:"tuktuk"},
+  {icon:"bus",title:"Franschhoek \u2192 CPT Airport",date:"Mon 6 Jul \u00b7 12:30",from:"Centre-Ville Guest House",to:"Cape Town International",ref:"EZ Shuttle #1967681",op:"EZ Shuttle",tone:"sage",color:"var(--accent)",detail:"Comfort Minibus (13 pax) departs Centre-Ville at 12:30 for the 16:40 Turkish Airlines TK0045. Allows time for check-in and duty-free.",confKey:"ez1967681"},
+];
+
+const ITINERARY_DATA = [
+  {n:"01",date:"Thu 25 Jun",tag:"Departure",tone:"plum",title:"Leaving Dublin",body:"Evening departure from Dublin (17:05) with Turkish Airlines TK1978, connecting through Istanbul. Arrive Istanbul 23:30.",color:"var(--accent-2)"},
+  {n:"02",date:"Fri 26 Jun",tag:"Cape Town",tone:"sage",title:"Arrival & settling in",body:"Arrive Cape Town 11:50 on TK0044. EZ Shuttle transfer to The Bantry Aparthotel. Afternoon at leisure to find your feet \u2014 the Waterfront is a short walk away.",color:"var(--accent)"},
+  {n:"03",date:"Sat 27 Jun",tag:"Cape Town",tone:"sage",title:"The city, your way",body:"Hop-on hop-off bus and a full-day Cape Town tour included. Explore at your own pace. Sunset harbour cruise in the evening.",color:"var(--accent)"},
+  {n:"04",date:"Sun 28 Jun",tag:"Private tour",tone:"clay",title:"The road trip",body:"A full day down the Cape Peninsula with your private guide and coach.",color:"var(--primary)",tl:[{time:"08:00",text:"Collection from hotel"},{time:"09:00",text:"Chapman's Peak Drive"},{time:"09:30",text:"Cape of Good Hope & Cape Point"},{time:"12:00",text:"Packed lunch at Buffels Bay"},{time:"13:00",text:"Boulders Beach \u2014 penguins"},{time:"15:00",text:"Table Mountain cable car"},{time:"17:30",text:"Return to hotel"}]},
+  {n:"05",date:"Mon 29 Jun",tag:"Private tour",tone:"clay",title:"Urban Safari",body:"A full day exploring the city's history, culture and harbour with your private guide.",color:"var(--primary)",tl:[{time:"08:30",text:"Collection from hotel"},{time:"09:00",text:"Robben Island ferry (weather permitting)"},{time:"12:30",text:"Lunch at Salt River Taproom"},{time:"15:00",text:"Bo-Kaap, District Six & Woodstock"},{time:"16:30",text:"Waterfront cruise (weather permitting)"},{time:"18:30",text:"Return to hotel"}]},
+  {n:"06",date:"Tue 30 Jun",tag:"Cape Town",tone:"sage",title:"Last Cape day",body:"Free time \u2014 shop the Old Biscuit Mill, revisit a favourite spot, or finally sit at the hotel pool. Last evening in Cape Town.",color:"var(--accent)"},
+  {n:"07",date:"Wed 1 Jul",tag:"Addo",tone:"clay",title:"Into the bush",body:"04:30 shuttle to Cape Town airport. Safair FA0136 departs 06:05, arrives Gqeberha 07:25. Lodge transfer to Bellevue Forest Lodge. First afternoon game drive, dinner under the stars.",color:"var(--primary)"},
+  {n:"08",date:"Thu 2 Jul",tag:"Addo",tone:"clay",title:"Full safari day",body:"Morning and evening game drives in search of the Big Five, a giraffe walking safari in between, and time to relax at camp. Elephant sightings almost guaranteed.",color:"var(--primary)"},
+  {n:"09",date:"Fri 3 Jul",tag:"Addo \u2192 Franschhoek",tone:"amber",title:"To the winelands",body:"Final morning at the lodge. Lodge transfer to Gqeberha Airport at 12:30. Safair FA0031 departs 14:30, arrives CPT 15:55. Private transfer through to Franschhoek, arriving early evening.",color:"var(--amber-600)"},
+  {n:"10",date:"Sat 4 Jul",tag:"Franschhoek",tone:"amber",title:"The wine tram",body:"All day on the Franschhoek Wine Tram \u2014 hop between estates, do as many or as few tastings as you like. Long winelands lunch is mandatory.",color:"var(--amber-600)"},
+  {n:"11",date:"Sun 5 Jul",tag:"Franschhoek",tone:"amber",title:"Tuk-tuk wine tour",body:"Full-day guided tuk-tuk tour visiting hand-picked Franschhoek estates with curated tastings and a winelands lunch. Last evening in the village.",color:"var(--amber-600)"},
+  {n:"12",date:"Mon 6 Jul",tag:"Homeward",tone:"plum",title:"Heading home",body:"Private transfer departs Centre-Ville at 13:00 for Cape Town Airport. Turkish Airlines TK0045 departs 16:40 via Istanbul. Arrive Dublin 09:35 Tuesday 7 July.",color:"var(--accent-2)"},
+];
+
+const TIPS_DATA = [
+  {icon:"shirt",title:"Pack for winter",body:"June\u2013July are Cape winter. Days are bright and clear but mornings and nights get cold \u2014 especially dawn drives at Addo. Layers are everything.",color:"var(--accent-2)"},
+  {icon:"plug",title:"Bring the right plug",body:"South Africa uses its own large three-pin plug. Pack a universal adapter. A power bank is handy for load-shedding \u2014 your hotels have backup power.",color:"var(--primary)"},
+  {icon:"mountain",title:"Time Table Mountain well",body:"The cable car closes in high wind. Go on the clearest, calmest morning rather than saving it for last. Blue sky and still air? Go immediately.",color:"var(--accent)"},
+  {icon:"droplet",title:"Tap water is fine",body:"Safe to drink straight from the tap across Cape Town and the winelands \u2014 no need for bottled water.",color:"var(--accent)"},
+  {icon:"credit-card",title:"Cards everywhere, cash for tips",body:"Tap-to-pay is standard everywhere. Keep some rand for tips: 10\u201315% in restaurants, a bit extra for guides and drivers.",color:"var(--amber-600)"},
+  {icon:"waves",title:"Watch for whales",body:"From June, Southern Right whales arrive along the Cape coast. Keep an eye on the water during the peninsula drive.",color:"var(--accent-2)"},
+  {icon:"shield-check",title:"No malaria at Addo",body:"Addo Elephant National Park is malaria-free \u2014 no antimalarials needed. Do carry your travel insurance details.",color:"var(--clay-600)"},
+  {icon:"car",title:"They drive on the left",body:"Same as Ireland. Local SIMs and eSIMs are cheap and easy if you want mobile data.",color:"var(--ink-mute)"},
+  {icon:"sun",title:"The winter sun deceives",body:"Even in July the Cape sun is strong. Pack high-SPF sunscreen \u2014 you'll be surprised how quickly you burn on a clear day.",color:"var(--primary)"},
+];
+
+const PACKING_DATA = [
+  {name:"Documents",icon:"clipboard-list",color:"var(--accent)",items:["Passport, valid well beyond travel","This itinerary & e-tickets","Travel insurance details","Payment card + rand for tips"]},
+  {name:"Clothing",icon:"shirt",color:"var(--accent-2)",items:["Warm jacket or coat","Jumpers & long-sleeve layers","Scarf, hat and gloves \u2014 early mornings","Comfortable walking shoes","Smart-casual for winelands evenings"]},
+  {name:"Safari (Addo)",icon:"binoculars",color:"var(--primary)",items:["Neutral, earthy colours only","Extra warm layer for dawn & dusk drives","Binoculars","Sunglasses & brimmed hat","Camera with a spare battery"]},
+  {name:"Health & tech",icon:"pill",color:"var(--amber-600)",items:["Universal adapter (SA three-pin)","Power bank","High-SPF sunscreen","Personal medication in original packaging","Phone with offline maps or eSIM"]},
+];
+
+const CONTACTS_DATA = [
+  {label:"Gillian \u00b7 Thula Travel",sub:"Your consultant \u00b7 WhatsApp & calls",num:"[+44 xxx xxx xxxx]",color:"var(--accent)",icon:"user"},
+  {label:"EZ Shuttle",sub:"All airport & city transfers \u00b7 WhatsApp",num:"+27 21 376610",color:"var(--amber-600)",icon:"bus"},
+  {label:"The Bantry Aparthotel",sub:"Cape Town \u00b7 26 Jun \u2013 1 Jul",num:"021 035 0921",color:"var(--accent-2)",icon:"waves"},
+  {label:"Bellevue Forest Lodge",sub:"Addo \u00b7 1\u20133 Jul",num:"[+27 42 xxx xxxx]",color:"var(--primary)",icon:"map-pin"},
+  {label:"Centre-Ville Guest House",sub:"Franschhoek \u00b7 3\u20136 Jul",num:"[+27 21 xxx xxxx]",color:"var(--amber-600)",icon:"grape"},
+  {label:"SA Emergency Services",sub:"Police, ambulance, fire",num:"112",color:"var(--clay-700)",icon:"siren"},
+  {label:"SA Police (SAPS)",sub:"Non-emergency",num:"10111",color:"var(--clay-700)",icon:"shield"},
+  {label:"Netcare 911",sub:"Private ambulance",num:"082 911",color:"var(--clay-700)",icon:"heart-pulse"},
+  {label:"Irish Embassy \u00b7 Pretoria",sub:"Consular assistance",num:"+27 12 452 1158",color:"var(--ink-mute)",icon:"landmark"},
+];
+
+const DOCS_DATA = [
+  {label:"Turkish Airlines ref (8 pax)",val:"SVIHB7",color:"var(--accent)"},
+  {label:"Turkish Airlines ref (Linda & Rachel)",val:"SZLHXR",color:"var(--accent)"},
+  {label:"EZ Shuttle ref \u00b7 CPT arrival",val:"#1967680",color:"var(--amber-600)"},
+  {label:"EZ Shuttle ref \u00b7 CPT \u2194 Franschhoek",val:"#1967681",color:"var(--amber-600)"},
+  {label:"Kiff Kombi Tours \u00b7 Private tour 28\u201329 Jun",val:"bookings@kiffkombitours.co.za",color:"var(--primary)"},
+  {label:"Safair \u00b7 CPT\u2192PLZ",val:"FA0136",color:"var(--accent-2)"},
+  {label:"Safair \u00b7 PLZ\u2192CPT",val:"FA0031",color:"var(--accent-2)"},
+];
+
+const HEALTH_DATA = [
+  {icon:"check-circle",text:"Addo is malaria-free \u2014 no antimalarials needed"},
+  {icon:"pill",text:"Keep personal medication in original packaging"},
+  {icon:"cross",text:"Nearest hospital to Bantry: Netcare Christiaan Barnard Memorial"},
+  {icon:"cross",text:"Nearest hospital to Addo: Netcare Port Elizabeth Hospital"},
+  {icon:"cross",text:"Nearest hospital to Franschhoek: Stellenbosch Hospital"},
+  {icon:"credit-card",text:"Keep travel insurance details accessible at all times"},
+  {icon:"sun",text:"Use sunscreen daily \u2014 the Cape sun is deceptively strong"},
+  {icon:"droplet",text:"Tap water is safe to drink throughout the trip"},
+];
+
+const CONFIRMATIONS = {
+  ez1967680: {
+    title:"EZ Shuttle \u00b7 Reservation #1967680",
+    supplier:"EZ Shuttle (Pty) Ltd",
+    contact:"info@ezshuttle.co.za \u00b7 +27 21 376610 \u00b7 WhatsApp available",
+    trips:[
+      {label:"Trip 1 \u00b7 PNR E5AE3QZL",details:["Pickup: Friday 26 Jun @ 11:50","From: Cape Town International Airport","To: The Bantry Aparthotel","Flight: TK0044","Vehicle: Comfort Minibus (13 pax) + Trailer"]},
+      {label:"Trip 2 \u00b7 PNR 0TQ4ODMG",details:["Pickup: Wednesday 1 Jul @ 04:30","From: The Bantry Aparthotel","To: Cape Town International Airport","Vehicle: Comfort Minibus (13 pax) + Trailer"]},
+    ]
+  },
+  ez1967681: {
+    title:"EZ Shuttle \u00b7 Reservation #1967681",
+    supplier:"EZ Shuttle (Pty) Ltd",
+    contact:"info@ezshuttle.co.za \u00b7 +27 21 376610 \u00b7 WhatsApp available",
+    trips:[
+      {label:"Trip 1 \u00b7 PNR FL3RPH2Z",details:["Pickup: Friday 3 Jul @ 15:55","From: Cape Town International Airport","To: Centre-Ville Guest House, Franschhoek","Flight: FA31","Vehicle: Comfort Minibus (13 pax) + Trailer"]},
+      {label:"Trip 2 \u00b7 PNR TEFZTC73",details:["Pickup: Monday 6 Jul @ 12:30","From: Centre-Ville Guest House","To: Cape Town International Airport","Vehicle: Comfort Minibus (13 pax) + Trailer"]},
+    ]
+  },
+  kiffkombi: {
+    title:"Kiff Kombi Tours \u00b7 Private tour",
+    supplier:"Kiff Kombi Tours",
+    contact:"bookings@kiffkombitours.co.za",
+    trips:[
+      {label:"Day 1 \u00b7 Sunday 28 Jun",details:["Private tour for 9 adults + 1 child","Route: Chapman's Peak \u2192 Cape of Good Hope \u2192 Cape Point \u2192 Boulders Beach \u2192 Table Mountain","Private vintage kombi \u2014 no shared transport"]},
+      {label:"Day 2 \u00b7 Monday 29 Jun",details:["Private tour for 9 adults + 1 child","Route: Robben Island ferry \u2192 Bo-Kaap \u2192 District Six \u2192 Woodstock \u2192 V&A Waterfront cruise","Private vintage kombi \u2014 no shared transport"]},
+    ]
+  },
+  citysightseeing: {
+    title:"City Sightseeing Cape Town",
+    supplier:"City Sightseeing South Africa",
+    contact:"+27 21 511 6000 \u00b7 36 Auckland Street, Paarden Eiland, Cape Town",
+    trips:[
+      {label:"Classic Hop-on-Hop-off \u00b7 Ref FWTGDJ25",details:["Date: Saturday 27 Jun","9 adults + 1 junior","Lead guest: Brid Walsh","Valid all day \u2014 board at any stop","Key stops: V&A Waterfront, Bo-Kaap, Signal Hill, Camps Bay, Sea Point"]},
+    ]
+  },
+  winetram: {
+    title:"Franschhoek Wine Tram",
+    supplier:"Franschhoek Wine Tram",
+    contact:"bookings@winetram.co.za",
+    trips:[
+      {label:"Orange Line \u00b7 Ref #8A43-FDE5",details:["Date: Sunday 5 Jul \u00b7 Departs 10:05","Lead guest: Brid Walsh","9 adults + 1 child","Starts & ends: Franschhoek Terminal","Complimentary shuttle to Groot Drakenstein Terminal included","Arrive 15 mins early to collect tickets","No BYO food or drink on estates","Book estate restaurant lunches in advance"]},
+    ]
+  },
+  tuktuk: {
+    title:"Tuk Tuk Franschhoek \u00b7 Half day wine tour",
+    supplier:"Tuk Tuk Franschhoek (Le Tuksi Bleu Pty Ltd)",
+    contact:"+27 72 735 3035 \u00b7 info@tuktukfranschhoek.co.za \u00b7 Le Petit Manoir, 54 Huguenot Road, Franschhoek",
+    trips:[
+      {label:"Half Day Tour \u00b7 Booking ID 2394558",details:["Date: Saturday 4 Jul \u00b7 Pickup 14:00","Pickup from: Centre-Ville Guesthouse","9 adults + 1 child (10\u201316)","Visits 3 estates of your choice (1 hour each)","Tastings, lunch and drinks NOT included \u2014 pay at each estate","Keep your Tuk Tuk sticker visible for discounts","Booked by: Thula Travel on behalf of Brid Walsh"]},
+    ]
+  },
+  tropicana: {
+    title:"The Bantry Aparthotel \u00b7 Reservation #8739",
+    supplier:"The Bantry Aparthotel (Perch Stays)",
+    contact:"tropicana@perchstays.co.za \u00b7 021 035 0921 \u00b7 perchstays.co.za",
+    trips:[
+      {label:"Accommodation \u00b7 26 Jun \u2013 1 Jul",details:[
+        "Property: The Bantry Aparthotel",
+        "Address: Kloof Road 6, Sea Point 8005",
+        "Check-in: 26 June 2026 \u00b7 Check-out: 1 July 2026",
+        "1 \u00d7 Studio Superior B&B + 4 \u00d7 Studio Standard B&B",
+        "Reservation: #8739",
+        "Note: No parking on site \u2014 street parking surrounds the hotel",
+      ]},
+      {label:"Rooming list",details:[
+        "Room 1: Brid Walsh & Louise Heffron",
+        "Room 2: Siobhan & Vincent Buckley",
+        "Room 3: Gavin Walsh (12) & Ellie Munnelly \u2014 Twin Beds",
+        "Room 4: Harry & Bernadette Dickinson",
+        "Room 5: Linda & Rachel Ryan \u2014 Twin Beds",
+      ]},
+    ]
+  },
+  centreVille: {
+    title:"Centre-Ville Guest House",
+    supplier:"Centre-Ville Guest House \u00b7 Morn\u00e9",
+    contact:"info@centre-ville.co.za",
+    trips:[
+      {label:"Accommodation \u00b7 3\u20136 July",details:[
+        "Property: Centre-Ville Guest House, Franschhoek",
+        "Check-in: 3 July 2026 \u00b7 Check-out: 6 July 2026",
+        "5 rooms \u00b7 Bed & Breakfast",
+      ]},
+      {label:"Rooming list",details:[
+        "Room 1: Brid Walsh & Louise Heffron",
+        "Room 2: Siobhan & Vincent Buckley",
+        "Room 3: Gavin Walsh (12) & Ellie Munnelly \u2014 Twin Beds",
+        "Room 4: Harry & Bernadette Dickinson",
+        "Room 5: Linda & Rachel Ryan \u2014 Twin Beds",
+      ]},
+      {label:"Restaurant reservation confirmed",details:[
+        "Frank's Corner \u2014 Sunday 5 July at 19:00",
+        "Booked directly by Centre-Ville",
+      ]},
+    ]
+  },
+};
+
+class Component extends DCLogic {
+  state = {
+    tab: "home",
+    transferOpen: null,
+    itinOpen: null,
+    packOpen: false,
+    checked: {},
+    copiedKey: null,
+    modalKey: null,
+    chatMessages: [
+      {from:"assistant", text:"Hi! I'm your Thula concierge \u2014 ask me anything while you're away: restaurants, safety, what to pack for tomorrow, whatever comes up."},
+    ],
+    isThinking: false,
+  };
+
+  setTab(id) {
+    this.setState({ tab: id });
+  }
+
+  toggleTransfer(i) {
+    this.setState(s => ({ transferOpen: s.transferOpen === i ? null : i }));
+  }
+
+  toggleItin(i) {
+    this.setState(s => ({ itinOpen: s.itinOpen === i ? null : i }));
+  }
+
+  togglePack() {
+    this.setState(s => ({ packOpen: !s.packOpen }));
+  }
+
+  toggleCheck(key) {
+    this.setState(s => ({ checked: { ...s.checked, [key]: !s.checked[key] } }));
+  }
+
+  resetPacking() {
+    this.setState({ checked: {} });
+  }
+
+  copy(text, key) {
+    if (navigator.clipboard) navigator.clipboard.writeText(text);
+    this.setState({ copiedKey: key });
+    setTimeout(() => this.setState(s => (s.copiedKey === key ? { copiedKey: null } : null)), 1800);
+  }
+
+  openModal(key) {
+    this.setState({ modalKey: key });
+  }
+
+  closeModal() {
+    this.setState({ modalKey: null });
+  }
+
+  sendPrompt(text) {
+    const userMsg = { from: "user", text };
+    this.setState(s => ({ chatMessages: [...s.chatMessages, userMsg], isThinking: true }));
+    setTimeout(() => {
+      const reply = { from: "assistant", text: runFakeConcierge(text) };
+      this.setState(s => ({ chatMessages: [...s.chatMessages, reply], isThinking: false }));
+    }, 900);
+  }
+
+  renderVals() {
+    const s = this.state;
+
+    const tabs = TABS_DEF.map(t => ({
+      ...t,
+      go: () => this.setTab(t.id),
+      active: s.tab === t.id,
+      color: s.tab === t.id ? "var(--accent)" : "var(--fg3)",
+      weight: s.tab === t.id ? 700 : 400,
+      size: s.tab === t.id ? 21 : 18,
+    }));
+
+    const navTiles = NAV_TILES_DEF.map(t => ({ ...t, go: () => this.setTab(t.id) }));
+
+    const homeStats = [
+      { n: TRIP.groupSize, l: "Travellers" },
+      { n: TRIP.nights, l: "Nights" },
+      { n: TRIP.destinationsCount, l: "Destinations" },
+      { n: TRIP.departureDate, l: "Departure" },
+    ];
+
+    const hotels = HOTELS_DATA.map(h => ({ ...h, openConf: () => this.openModal(h.confKey) }));
+
+    const transfersList = TRANSFERS_DATA.map((t, i) => ({
+      ...t,
+      isOpen: s.transferOpen === i,
+      chevron: s.transferOpen === i ? "\u203a" : "\u203a",
+      toggle: () => this.toggleTransfer(i),
+      openConf: () => this.openModal(t.confKey),
+    }));
+
+    const itinerary = ITINERARY_DATA.map((d, i) => ({
+      ...d,
+      isOpen: s.itinOpen === i,
+      hasTl: !!d.tl,
+      chevron: "\u203a",
+      toggle: () => this.toggleItin(i),
+    }));
+
+    const packing = PACKING_DATA.map(cat => ({
+      ...cat,
+      items: cat.items.map((text, j) => {
+        const key = cat.name + "-" + j;
+        const isChecked = !!s.checked[key];
+        return {
+          text,
+          key,
+          checked: isChecked,
+          toggle: () => this.toggleCheck(key),
+          textColor: isChecked ? "var(--fg3)" : "var(--fg1)",
+          strike: isChecked ? "line-through" : "none",
+          boxBorder: isChecked ? cat.color : "var(--sage-300)",
+          boxBg: isChecked ? cat.color : "transparent",
+        };
+      }),
+    }));
+
+    const contacts = CONTACTS_DATA.map((c, i) => {
+      const key = "c-" + i;
+      const copied = s.copiedKey === key;
+      return {
+        ...c,
+        copy: () => this.copy(c.num, key),
+        copyLabel: copied ? "\u2713" : "Copy",
+        copyBg: copied ? "var(--sage-100)" : "var(--sand)",
+        copyFg: copied ? "var(--accent)" : c.color,
+      };
+    });
+
+    const docs = DOCS_DATA.map((d, i) => {
+      const key = "d-" + i;
+      const copied = s.copiedKey === key;
+      return {
+        ...d,
+        copy: () => this.copy(d.val, key),
+        copyLabel: copied ? "\u2713" : "Copy",
+        copyBg: copied ? "var(--sage-100)" : "var(--sand)",
+        copyFg: copied ? "var(--accent)" : d.color,
+      };
+    });
+
+    const activeModal = s.modalKey ? CONFIRMATIONS[s.modalKey] : null;
+
+    return {
+      isHome: s.tab === "home",
+      isFlights: s.tab === "flights",
+      isHotels: s.tab === "hotels",
+      isTransfers: s.tab === "transfers",
+      isItinerary: s.tab === "itinerary",
+      isTips: s.tab === "tips",
+      isEmergency: s.tab === "emergency",
+      isConcierge: s.tab === "concierge",
+      chatMessages: s.chatMessages.map(m => ({
+        ...m,
+        rowStyle: m.from === "user" ? "justify-content:flex-end;" : "justify-content:flex-start;",
+        bg: m.from === "user" ? "var(--primary)" : "var(--sand)",
+        color: m.from === "user" ? "#fff" : "var(--fg1)",
+        radius: m.from === "user" ? "16px 16px 4px 16px" : "16px 16px 16px 4px",
+      })),
+      isThinking: s.isThinking,
+      suggestedPrompts: SUGGESTED_PROMPTS.map(label => ({ label, ask: () => this.sendPrompt(label) })),
+
+      clientName: TRIP.client,
+      groupSize: TRIP.groupSize,
+      destinationLine1: TRIP.destinationLine1,
+      destinationLine2: TRIP.destinationLine2,
+      dateRange: TRIP.dateRange,
+      consultantName: TRIP.consultant,
+
+      tabs,
+      navTiles,
+      homeStats,
+      journeyGlance: JOURNEY_GLANCE_DEF,
+
+      flights: FLIGHTS_DATA,
+      hotels,
+      transfersList,
+      itinerary,
+      tips: TIPS_DATA,
+      packing,
+      packOpen: s.packOpen,
+      packChevron: s.packOpen ? "\u2304" : "\u203a",
+      togglePack: () => this.togglePack(),
+      resetPacking: () => this.resetPacking(),
+
+      contacts,
+      docs,
+      health: HEALTH_DATA,
+
+      modalOpen: !!activeModal,
+      activeModal: activeModal || { title: "", supplier: "", contact: "", trips: [] },
+      closeModal: () => this.closeModal(),
+      stopProp: e => e.stopPropagation(),
+    };
+  }
+}
+
+</script>
+</body>
+</html>

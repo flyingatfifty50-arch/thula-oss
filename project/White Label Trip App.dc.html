@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link rel="stylesheet" href="_ds/thula-travel-design-system-e4d7566b-09e7-4eb9-8cfb-fa504a40e344/colors_and_type.css">
+  <link rel="stylesheet" href="_ds/thula-travel-design-system-e4d7566b-09e7-4eb9-8cfb-fa504a40e344/social/fonts-embed.css">
+  <link rel="stylesheet" href="_ds/thula-travel-design-system-e4d7566b-09e7-4eb9-8cfb-fa504a40e344/styles.css">
+  <script src="_ds/thula-travel-design-system-e4d7566b-09e7-4eb9-8cfb-fa504a40e344/_ds_bundle.js"></script>
+  <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.js"></script>
+  <style>
+    body{margin:0;background:var(--sand);}
+  </style>
+</helmet>
+
+<div style="max-width:420px;margin:0 auto;min-height:100vh;background:var(--paper);position:relative;font-family:var(--font-serif);box-shadow:0 0 60px rgba(30,36,28,0.12);--accent:{{ accentColor }};--deep:{{ accentColor }};">
+
+  <div style="height:100vh;overflow-y:auto;padding-bottom:84px;">
+
+    <!-- banner: this is a template -->
+    <div style="background:var(--amber-100);border-bottom:1px solid var(--amber-300);padding:8px 20px;text-align:center;">
+      <span style="font-family:var(--font-serif);font-weight:600;font-size:11px;letter-spacing:0.05em;color:var(--amber-600);">White-label template &middot; sample data &middot; duplicate &amp; rebrand per client</span>
+    </div>
+
+    <!-- ============ HOME ============ -->
+    <sc-if value="{{ isHome }}">
+      <div>
+        <div style="background:var(--deep);padding:40px 22px 30px;position:relative;overflow:hidden;">
+          <div style="position:relative;z-index:1;">
+            <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(251,244,233,0.75);margin:0 0 10px;">{{ agencyName }} &middot; Private itinerary</p>
+            <h1 style="font-family:var(--font-script);font-weight:700;font-size:44px;color:var(--fg-on-dark);line-height:0.95;margin:0 0 12px;">{{ destinationLine1 }} <em style="color:var(--secondary);font-style:normal;">{{ destinationLine2 }}</em></h1>
+            <p style="color:rgba(251,244,233,0.78);font-size:13.5px;margin:0 0 22px;line-height:1.5;">{{ clientName }} &amp; group of {{ groupSize }} &middot; {{ dateRange }}</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <sc-for list="{{ homeStats }}" as="st" hint-placeholder-count="4">
+                <div style="background:rgba(251,244,233,0.12);border-radius:12px;padding:10px 14px;text-align:center;">
+                  <div style="font-family:var(--font-serif);font-size:20px;font-weight:700;color:var(--fg-on-dark);line-height:1;">{{ st.n }}</div>
+                  <div style="font-family:var(--font-serif);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(251,244,233,0.6);margin-top:4px;">{{ st.l }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <div style="padding:22px 20px 0;">
+          <div style="background:var(--card);border-radius:var(--r-lg);border:1px solid var(--line);padding:18px;box-shadow:var(--shadow-sm);margin-bottom:6px;">
+            <p style="color:var(--fg2);font-size:14px;line-height:1.7;margin:0 0 10px;">Everything for your {{ destinationLine1 }} {{ destinationLine2 }} trip in one place &mdash; open it from your phone wherever you are.</p>
+            <p style="color:var(--fg2);font-size:14px;line-height:1.7;margin:0 0 12px;">If anything comes up, message me any time.</p>
+            <p style="font-family:var(--font-script);font-size:19px;color:var(--accent);margin:10px 0 2px;">{{ consultantName }}</p>
+            <p style="font-family:var(--font-serif);font-weight:600;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--fg3);margin:0;">{{ agencyName }}</p>
+          </div>
+
+          <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent);margin:22px 0 10px;">Quick nav</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <sc-for list="{{ navTiles }}" as="t" hint-placeholder-count="6">
+              <button onClick="{{ t.go }}" style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:14px;text-align:left;cursor:pointer;position:relative;overflow:hidden;">
+                <div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:{{ t.color }};"></div>
+                <div style="color:{{ t.color }};margin-bottom:8px;"><x-import component-from-global-scope="Icon" name="{{ t.icon }}" size="22" hint-size="22px,22px"></x-import></div>
+                <span style="font-weight:700;font-size:14px;color:var(--fg1);display:block;">{{ t.label }}</span>
+                <span style="font-size:11px;color:var(--fg3);">{{ t.sub }}</span>
+              </button>
+            </sc-for>
+          </div>
+
+          <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent);margin:24px 0 10px;">Your journey at a glance</p>
+          <sc-for list="{{ journeyGlance }}" as="s" hint-placeholder-count="2">
+            <div style="background:var(--card);border-radius:var(--r-md);border:1px solid var(--line);padding:13px 15px;margin-bottom:8px;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden;">
+              <div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:{{ s.color }};"></div>
+              <div style="color:{{ s.color }};flex-shrink:0;"><x-import component-from-global-scope="Icon" name="{{ s.icon }}" size="24" hint-size="24px,24px"></x-import></div>
+              <div style="flex:1;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px;">
+                  <span style="font-weight:700;font-size:15px;color:var(--fg1);">{{ s.loc }}</span>
+                  <x-import component-from-global-scope="Pill" tone="{{ s.tone }}" hint-size="auto,24px">{{ s.nights }}</x-import>
+                </div>
+                <div style="font-size:12px;color:var(--fg3);">{{ s.hotel }}</div>
+                <div style="font-family:var(--font-serif);font-weight:600;font-size:11px;color:{{ s.color }};margin-top:3px;">{{ s.dates }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ============ FLIGHTS ============ -->
+    <sc-if value="{{ isFlights }}">
+      <div>
+        <div style="padding:26px 20px 0;">
+          <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin:0 0 4px;">Getting there</p>
+          <h2 style="font-family:var(--font-serif);font-weight:600;font-size:26px;color:var(--fg1);margin:0 0 18px;line-height:1.1;">Flights</h2>
+        </div>
+        <div style="padding:0 20px 28px;">
+          <sc-for list="{{ flights }}" as="f" hint-placeholder-count="4">
+            <div style="background:var(--card);border-radius:var(--r-md);border:1px solid var(--line);padding:15px;margin-bottom:10px;position:relative;overflow:hidden;box-shadow:var(--shadow-sm);">
+              <div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:{{ f.color }};"></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                <span style="font-family:var(--font-serif);font-weight:600;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--fg3);">{{ f.carrier }} &middot; {{ f.date }}</span>
+                <span style="font-family:var(--font-serif);font-size:12.5px;font-weight:700;color:{{ f.color }};background:var(--sand);padding:3px 9px;border-radius:8px;">{{ f.code }}</span>
+              </div>
+              <div style="display:flex;align-items:center;">
+                <div style="text-align:center;min-width:56px;">
+                  <div style="font-family:var(--font-serif);font-size:23px;font-weight:700;color:var(--fg1);line-height:1;">{{ f.from }}</div>
+                  <div style="font-size:10px;color:var(--fg3);">{{ f.fromCity }}</div>
+                </div>
+                <div style="flex:1;display:flex;align-items:center;padding:0 10px;">
+                  <div style="flex:1;height:1px;background:var(--line);"></div>
+                  <div style="color:var(--primary);margin:0 6px;"><x-import component-from-global-scope="Icon" name="plane" size="16" hint-size="16px,16px"></x-import></div>
+                  <div style="flex:1;height:1px;background:var(--line);"></div>
+                </div>
+                <div style="text-align:center;min-width:56px;">
+                  <div style="font-family:var(--font-serif);font-size:23px;font-weight:700;color:var(--fg1);line-height:1;">{{ f.to }}</div>
+                  <div style="font-size:10px;color:var(--fg3);">{{ f.toCity }}</div>
+                </div>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);">
+                <div><span style="font-family:var(--font-serif);font-weight:600;font-size:9.5px;text-transform:uppercase;letter-spacing:0.1em;color:var(--fg3);display:block;">Departs</span><b style="font-size:14px;color:var(--fg1);">{{ f.dep }}</b></div>
+                <div style="text-align:right;"><span style="font-family:var(--font-serif);font-weight:600;font-size:9.5px;text-transform:uppercase;letter-spacing:0.1em;color:var(--fg3);display:block;">Arrives</span><b style="font-size:14px;color:var(--fg1);">{{ f.arr }}</b></div>
+              </div>
+            </div>
+          </sc-for>
+          <div style="background:var(--amber-100);border-radius:var(--r-md);padding:14px 16px;border:1px solid var(--amber-300);">
+            <p style="font-family:var(--font-serif);font-weight:700;font-size:10.5px;text-transform:uppercase;letter-spacing:0.12em;color:var(--amber-600);margin:0 0 8px;">Booking refs</p>
+            <div style="font-size:13px;color:var(--fg1);line-height:1.9;">Sample booking reference <b>XXXXXX</b></div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ============ HOTELS ============ -->
+    <sc-if value="{{ isHotels }}">
+      <div>
+        <div style="padding:26px 20px 0;">
+          <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin:0 0 4px;">Where you'll stay</p>
+          <h2 style="font-family:var(--font-serif);font-weight:600;font-size:26px;color:var(--fg1);margin:0 0 18px;line-height:1.1;">Hotels</h2>
+        </div>
+        <div style="padding:0 20px 28px;">
+          <sc-for list="{{ hotels }}" as="h" hint-placeholder-count="2">
+            <div style="background:var(--card);border-radius:var(--r-lg);border:1px solid var(--line);margin-bottom:20px;overflow:hidden;box-shadow:var(--shadow-md);">
+              <div style="position:relative;height:150px;overflow:hidden;background:{{ h.gradient }};">
+                <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(31,30,26,0.55));"></div>
+                <div style="position:absolute;top:12px;left:12px;background:rgba(31,30,26,0.75);backdrop-filter:blur(4px);border-radius:20px;padding:5px 12px;">
+                  <span style="font-family:var(--font-serif);font-weight:600;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-on-dark);">{{ h.dates }}</span>
+                </div>
+              </div>
+              <div style="padding:16px 18px;">
+                <p style="font-family:var(--font-serif);font-weight:600;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:{{ h.color }};margin:0 0 3px;">{{ h.loc }}</p>
+                <h3 style="font-family:var(--font-serif);font-weight:600;font-size:19px;color:var(--fg1);margin:0 0 3px;">{{ h.name }}</h3>
+                <p style="font-size:11.5px;color:var(--fg3);margin:0 0 10px;">{{ h.board }}</p>
+                <p style="font-size:13.5px;color:var(--fg2);line-height:1.6;margin:0 0 12px;">{{ h.desc }}</p>
+                <a href="#" style="display:block;background:var(--primary);color:var(--fg-on-clay);text-align:center;padding:11px 0;border-radius:var(--r-pill);font-size:13.5px;font-weight:600;text-decoration:none;">Website &#8599;</a>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ============ ITINERARY ============ -->
+    <sc-if value="{{ isItinerary }}">
+      <div>
+        <div style="padding:26px 20px 0;">
+          <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin:0 0 4px;">Your journey, day by day</p>
+          <h2 style="font-family:var(--font-serif);font-weight:600;font-size:26px;color:var(--fg1);margin:0 0 18px;line-height:1.1;">Itinerary</h2>
+        </div>
+        <div style="padding:0 20px 28px;">
+          <sc-for list="{{ itinerary }}" as="d" hint-placeholder-count="5">
+            <div style="background:var(--card);border-radius:var(--r-md);border:1px solid var(--line);margin-bottom:10px;overflow:hidden;box-shadow:var(--shadow-sm);">
+              <button onClick="{{ d.toggle }}" style="width:100%;background:none;border:none;cursor:pointer;padding:13px 15px;display:flex;align-items:center;gap:12px;text-align:left;">
+                <div style="width:44px;height:44px;border-radius:12px;background:var(--sand);border:1.5px solid {{ d.color }};display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;">
+                  <span style="font-family:var(--font-serif);font-size:16px;font-weight:700;color:{{ d.color }};line-height:1;">{{ d.n }}</span>
+                </div>
+                <div style="flex:1;">
+                  <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px;flex-wrap:wrap;">
+                    <x-import component-from-global-scope="Pill" tone="{{ d.tone }}" hint-size="auto,24px">{{ d.tag }}</x-import>
+                    <span style="font-family:var(--font-serif);font-size:10.5px;color:var(--fg3);">{{ d.date }}</span>
+                  </div>
+                  <span style="font-weight:700;font-size:14px;color:var(--fg1);">{{ d.title }}</span>
+                </div>
+                <span style="color:var(--fg3);font-size:18px;flex-shrink:0;">&rsaquo;</span>
+              </button>
+              <sc-if value="{{ d.isOpen }}">
+                <div style="padding:0 15px 15px;border-top:1px solid var(--line);">
+                  <p style="color:var(--fg2);font-size:13px;line-height:1.65;margin:12px 0 0;">{{ d.body }}</p>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ============ TIPS ============ -->
+    <sc-if value="{{ isTips }}">
+      <div>
+        <div style="padding:26px 20px 0;">
+          <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);margin:0 0 4px;">From us to you</p>
+          <h2 style="font-family:var(--font-serif);font-weight:600;font-size:26px;color:var(--fg1);margin:0 0 18px;line-height:1.1;">Travel tips</h2>
+        </div>
+        <div style="padding:0 20px 28px;">
+          <sc-for list="{{ tips }}" as="t" hint-placeholder-count="4">
+            <div style="background:var(--card);border-radius:var(--r-md);border:1px solid var(--line);padding:13px 15px;margin-bottom:9px;display:flex;gap:12px;position:relative;overflow:hidden;box-shadow:var(--shadow-sm);">
+              <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:{{ t.color }};opacity:0.5;"></div>
+              <div style="color:{{ t.color }};flex-shrink:0;"><x-import component-from-global-scope="Icon" name="{{ t.icon }}" size="21" hint-size="21px,21px"></x-import></div>
+              <div>
+                <h4 style="font-weight:700;font-size:14px;color:var(--fg1);margin:0 0 4px;">{{ t.title }}</h4>
+                <p style="font-size:13px;color:var(--fg2);margin:0;line-height:1.6;">{{ t.body }}</p>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ============ EMERGENCY ============ -->
+    <sc-if value="{{ isEmergency }}">
+      <div>
+        <div style="background:var(--clay-700);padding:28px 20px 24px;position:relative;overflow:hidden;">
+          <p style="font-family:var(--font-serif);font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--clay-200);margin:0 0 6px;">Important</p>
+          <h2 style="font-family:var(--font-serif);font-weight:600;font-size:25px;color:#fff;margin:0 0 8px;">Emergency &amp; key contacts</h2>
+          <p style="font-size:13px;color:rgba(255,255,255,0.8);margin:0;">All numbers in one place. Share this screen with your group.</p>
+        </div>
+        <div style="padding:20px 20px 28px;">
+          <sc-for list="{{ contacts }}" as="c" hint-placeholder-count="4">
+            <div style="background:var(--card);border-radius:var(--r-md);border:1px solid var(--line);padding:13px 15px;margin-bottom:9px;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden;box-shadow:var(--shadow-sm);">
+              <div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:{{ c.color }};"></div>
+              <div style="color:{{ c.color }};flex-shrink:0;"><x-import component-from-global-scope="Icon" name="{{ c.icon }}" size="21" hint-size="21px,21px"></x-import></div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-weight:700;font-size:14px;color:var(--fg1);">{{ c.label }}</div>
+                <div style="font-size:11px;color:var(--fg3);margin-bottom:3px;">{{ c.sub }}</div>
+                <div style="font-size:13px;color:{{ c.color }};font-weight:600;">{{ c.num }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+  </div>
+
+  <!-- ============ BOTTOM TAB BAR ============ -->
+  <div style="position:absolute;bottom:0;left:0;right:0;background:rgba(255,253,248,0.97);backdrop-filter:blur(12px);border-top:1px solid var(--line);">
+    <div style="display:flex;justify-content:space-around;padding:8px 4px 10px;overflow-x:auto;">
+      <sc-for list="{{ tabs }}" as="tb" hint-placeholder-count="6">
+        <button onClick="{{ tb.go }}" style="background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 6px;border-radius:10px;flex-shrink:0;color:{{ tb.color }};">
+          <x-import component-from-global-scope="Icon" name="{{ tb.icon }}" size="{{ tb.size }}" hint-size="20px,20px"></x-import>
+          <span style="font-family:var(--font-serif);font-size:9px;letter-spacing:0.04em;color:{{ tb.color }};font-weight:{{ tb.weight }};white-space:nowrap;">{{ tb.label }}</span>
+          <sc-if value="{{ tb.active }}"><div style="width:16px;height:2.5px;background:var(--primary);border-radius:2px;"></div></sc-if>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:420,&quot;height&quot;:880},&quot;agencyName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Your Travel Co&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#317653&quot;,&quot;options&quot;:[&quot;#317653&quot;,&quot;#DE3831&quot;,&quot;#002395&quot;,&quot;#FFB915&quot;,&quot;#8E96C6&quot;],&quot;tsType&quot;:&quot;string&quot;},&quot;consultantName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;[Consultant name]&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;clientName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;[Client name]&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;groupSize&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:2,&quot;tsType&quot;:&quot;number&quot;},&quot;destinationLine1&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Sample&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;destinationLine2&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Destination&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;dateRange&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;[Date range]&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+
+const TABS_DEF = [
+  {id:"home",label:"Home",icon:"home"},
+  {id:"flights",label:"Flights",icon:"plane"},
+  {id:"hotels",label:"Hotels",icon:"bed-double"},
+  {id:"itinerary",label:"Plan",icon:"calendar-days"},
+  {id:"tips",label:"Tips",icon:"lightbulb"},
+  {id:"emergency",label:"SOS",icon:"life-buoy"},
+];
+
+const NAV_TILES_DEF = [
+  {id:"flights",icon:"plane",label:"Flights",sub:"Sample flights",color:"var(--accent)"},
+  {id:"hotels",icon:"bed-double",label:"Hotels",sub:"Sample properties",color:"var(--primary)"},
+  {id:"itinerary",icon:"calendar-days",label:"Itinerary",sub:"Day by day",color:"var(--secondary)"},
+  {id:"tips",icon:"lightbulb",label:"Tips",sub:"Local know-how",color:"var(--clay-600)"},
+  {id:"emergency",icon:"life-buoy",label:"Emergency",sub:"Key contacts",color:"var(--primary)"},
+];
+
+const JOURNEY_GLANCE_DEF = [
+  {icon:"waves",tone:"sage",color:"var(--accent)",loc:"Coastal City",nights:"4 nights",dates:"Day 1\u20134",hotel:"Sample Beachfront Hotel"},
+  {icon:"map-pin",tone:"clay",color:"var(--primary)",loc:"Countryside",nights:"3 nights",dates:"Day 5\u20137",hotel:"Sample Lodge"},
+];
+
+const FLIGHTS_DATA = [
+  {carrier:"Sample Airline",date:"Day 1",code:"XX0000",from:"XXX",fromCity:"Home city",to:"YYY",toCity:"Destination city",dep:"09:00",arr:"17:00",color:"var(--accent)"},
+  {carrier:"Sample Airline",date:"Day 7",code:"XX0001",from:"YYY",toCity:"Home city",toCity:"Home city",fromCity:"Destination city",to:"XXX",dep:"12:00",arr:"20:00",color:"var(--accent-2)"},
+];
+
+const HOTELS_DATA = [
+  {name:"Sample Beachfront Hotel",loc:"Coastal City",dates:"Day 1\u20134 \u00b7 4 nights",board:"Breakfast included",desc:"Placeholder description \u2014 replace with the real property's story and setting.",gradient:"var(--fig-fynbos)",color:"var(--accent)"},
+  {name:"Sample Countryside Lodge",loc:"Countryside",dates:"Day 5\u20137 \u00b7 3 nights",board:"Half board",desc:"Placeholder description \u2014 replace with the real property's story and setting.",gradient:"var(--fig-savanna)",color:"var(--primary)"},
+];
+
+const ITINERARY_DATA = [
+  {n:"01",date:"Day 1",tag:"Arrival",tone:"sage",title:"Arrival & settling in",body:"Placeholder itinerary text \u2014 describe arrival logistics and first impressions.",color:"var(--accent)"},
+  {n:"02",date:"Day 2",tag:"Explore",tone:"clay",title:"A day to explore",body:"Placeholder itinerary text \u2014 describe the day's activities.",color:"var(--primary)"},
+  {n:"03",date:"Day 3",tag:"Private tour",tone:"plum",title:"Signature experience",body:"Placeholder itinerary text \u2014 describe the standout excursion for this trip.",color:"var(--accent-2)"},
+];
+
+const TIPS_DATA = [
+  {icon:"shirt",title:"What to pack",body:"Placeholder tip \u2014 note seasonal packing guidance for this destination.",color:"var(--accent-2)"},
+  {icon:"credit-card",title:"Money & tipping",body:"Placeholder tip \u2014 local currency and tipping norms.",color:"var(--amber-600)"},
+  {icon:"shield-check",title:"Health & safety",body:"Placeholder tip \u2014 vaccination, water safety, or other need-to-knows.",color:"var(--clay-600)"},
+];
+
+const CONTACTS_DATA = [
+  {label:"[Consultant name]",sub:"Your consultant \u00b7 WhatsApp & calls",num:"[phone number]",color:"var(--accent)",icon:"user"},
+  {label:"[Local emergency services]",sub:"Police, ambulance, fire",num:"[local emergency number]",color:"var(--clay-700)",icon:"siren"},
+];
+
+class Component extends DCLogic {
+  state = { tab: "home", itinOpen: null };
+
+  setTab(id) { this.setState({ tab: id }); }
+  toggleItin(i) { this.setState(s => ({ itinOpen: s.itinOpen === i ? null : i })); }
+
+  renderVals() {
+    const s = this.state;
+    const agencyName = this.props.agencyName ?? "Your Travel Co";
+    const accentColor = this.props.accentColor ?? "#317653";
+    const consultantName = this.props.consultantName ?? "[Consultant name]";
+    const clientName = this.props.clientName ?? "[Client name]";
+    const groupSize = this.props.groupSize ?? 2;
+    const destinationLine1 = this.props.destinationLine1 ?? "Sample";
+    const destinationLine2 = this.props.destinationLine2 ?? "Destination";
+    const dateRange = this.props.dateRange ?? "[Date range]";
+
+    const tabs = TABS_DEF.map(t => ({
+      ...t,
+      go: () => this.setTab(t.id),
+      active: s.tab === t.id,
+      color: s.tab === t.id ? "var(--accent)" : "var(--fg3)",
+      weight: s.tab === t.id ? 700 : 400,
+      size: s.tab === t.id ? 21 : 18,
+    }));
+
+    const navTiles = NAV_TILES_DEF.map(t => ({ ...t, go: () => this.setTab(t.id) }));
+
+    const homeStats = [
+      { n: groupSize, l: "Travellers" },
+      { n: 7, l: "Nights" },
+      { n: 2, l: "Destinations" },
+      { n: "Day 1", l: "Departure" },
+    ];
+
+    const itinerary = ITINERARY_DATA.map((d, i) => ({
+      ...d,
+      isOpen: s.itinOpen === i,
+      toggle: () => this.toggleItin(i),
+    }));
+
+    return {
+      isHome: s.tab === "home",
+      isFlights: s.tab === "flights",
+      isHotels: s.tab === "hotels",
+      isItinerary: s.tab === "itinerary",
+      isTips: s.tab === "tips",
+      isEmergency: s.tab === "emergency",
+
+      agencyName, accentColor, consultantName, clientName, groupSize,
+      destinationLine1, destinationLine2, dateRange,
+
+      tabs, navTiles, homeStats,
+      journeyGlance: JOURNEY_GLANCE_DEF,
+      flights: FLIGHTS_DATA,
+      hotels: HOTELS_DATA,
+      itinerary,
+      tips: TIPS_DATA,
+      contacts: CONTACTS_DATA,
+    };
+  }
+}
+
+</script>
+</body>
+</html>

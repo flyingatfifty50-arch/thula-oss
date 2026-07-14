@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link rel="stylesheet" href="_ds/thula-travel-design-system-e4d7566b-09e7-4eb9-8cfb-fa504a40e344/colors_and_type.css">
+  <link rel="stylesheet" href="_ds/thula-travel-design-system-e4d7566b-09e7-4eb9-8cfb-fa504a40e344/social/fonts-embed.css">
+  <link rel="stylesheet" href="_ds/thula-travel-design-system-e4d7566b-09e7-4eb9-8cfb-fa504a40e344/styles.css">
+  <script src="_ds/thula-travel-design-system-e4d7566b-09e7-4eb9-8cfb-fa504a40e344/_ds_bundle.js"></script>
+  <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.js"></script>
+  <style>body{margin:0;background:#fff;}</style>
+</helmet>
+
+<div style="font-family:var(--font-serif);color:var(--fg1);--accent:#317653;--sage-600:#317653;min-height:100vh;background:#fff;">
+
+  <!-- ============ LOGIN ============ -->
+  <sc-if value="{{ isLogin }}">
+    <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--ink);padding:20px;">
+      <div style="background:#fff;border-radius:var(--r-md);box-shadow:var(--shadow-lg);width:100%;max-width:380px;padding:36px 32px;text-align:center;">
+        <span style="color:var(--accent);font-family:var(--font-serif);font-weight:700;font-size:15px;">Thula Ops</span>
+        <h1 style="font-family:var(--font-serif);font-size:1.2rem;font-weight:600;margin:16px 0 20px;color:var(--fg1);">Staff sign-in</h1>
+        <div style="text-align:left;margin-bottom:12px;">
+          <label style="font-size:11px;font-weight:600;color:var(--fg2);display:block;margin-bottom:5px;">Email</label>
+          <div style="border:1.5px solid var(--line);border-radius:6px;padding:9px 13px;font-size:0.85rem;color:var(--fg3);">gillian@thula.travel</div>
+        </div>
+        <div style="text-align:left;margin-bottom:20px;">
+          <label style="font-size:11px;font-weight:600;color:var(--fg2);display:block;margin-bottom:5px;">Password</label>
+          <div style="border:1.5px solid var(--line);border-radius:6px;padding:9px 13px;font-size:0.85rem;color:var(--fg3);">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
+        </div>
+        <button onClick="{{ login }}" style="width:100%;background:var(--ink);color:#fff;border:none;border-radius:6px;padding:11px 0;font-size:0.9rem;font-weight:600;cursor:pointer;">Sign in</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ APP SHELL ============ -->
+  <sc-if value="{{ isApp }}">
+    <div style="display:flex;min-height:100vh;">
+
+      <!-- SIDEBAR -->
+      <div style="width:170px;background:var(--ink);padding:18px 14px;display:flex;flex-direction:column;gap:2px;flex-shrink:0;">
+        <span style="color:var(--secondary);font-family:var(--font-serif);font-weight:700;font-size:13px;margin-bottom:16px;">Thula Ops</span>
+        <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="4">
+          <button onClick="{{ n.go }}" style="display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:6px;background:{{ n.bg }};color:{{ n.color }};font-size:12.5px;font-weight:{{ n.weight }};border:none;cursor:pointer;text-align:left;width:100%;">
+            <x-import component-from-global-scope="Icon" name="{{ n.icon }}" size="14" hint-size="14px,14px"></x-import>{{ n.label }}
+          </button>
+        </sc-for>
+        <div style="flex:1;"></div>
+        <button onClick="{{ logout }}" style="display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:6px;color:rgba(251,244,233,0.6);font-size:11.5px;border:none;background:none;cursor:pointer;text-align:left;">
+          <x-import component-from-global-scope="Icon" name="log-out" size="13" hint-size="13px,13px"></x-import>Sign out
+        </button>
+      </div>
+
+      <!-- MAIN -->
+      <div style="flex:1;padding:28px 34px;overflow-y:auto;">
+
+        <!-- CLIENTS TABLE -->
+        <sc-if value="{{ isClients }}">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
+            <h2 style="font-family:var(--font-serif);font-weight:600;font-size:1.3rem;margin:0;color:var(--fg1);">All clients</h2>
+            <div style="display:flex;gap:6px;">
+              <span style="font-size:11px;background:var(--sand);padding:5px 11px;border-radius:6px;color:var(--fg2);">Filter</span>
+              <span style="font-size:11px;background:var(--sand);padding:5px 11px;border-radius:6px;color:var(--fg2);">Sort</span>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1.5fr 0.9fr 0.9fr 0.9fr 0.9fr;gap:0;font-size:10.5px;letter-spacing:0.05em;text-transform:uppercase;color:var(--fg3);font-weight:600;padding:0 12px 10px;border-bottom:1px solid var(--line);">
+            <div>Client</div><div>Stage</div><div>Value</div><div>Margin</div><div>Due</div>
+          </div>
+          <sc-for list="{{ clients }}" as="c" hint-placeholder-count="3">
+            <div onClick="{{ c.open }}" style="display:grid;grid-template-columns:1.5fr 0.9fr 0.9fr 0.9fr 0.9fr;gap:0;font-size:0.85rem;padding:12px;border-bottom:1px solid var(--line-soft);align-items:center;cursor:pointer;">
+              <div style="font-weight:600;color:var(--fg1);">{{ c.name }}</div>
+              <div><x-import component-from-global-scope="Pill" tone="{{ c.tone }}" hint-size="auto,22px">{{ c.status }}</x-import></div>
+              <div style="color:var(--fg2);">{{ c.value }}</div>
+              <div style="color:var(--accent);">{{ c.margin }}</div>
+              <div style="color:var(--primary);">{{ c.due }}</div>
+            </div>
+          </sc-for>
+          <div style="margin-top:16px;padding-top:12px;border-top:1px dashed var(--line);display:flex;justify-content:space-between;font-size:0.85rem;color:var(--fg2);padding-left:12px;padding-right:12px;">
+            <span>Total pipeline value</span><span style="font-weight:700;color:var(--fg1);">&euro;32.1k</span>
+          </div>
+        </sc-if>
+
+        <!-- CLIENT DETAIL -->
+        <sc-if value="{{ isClientDetail }}">
+          <button onClick="{{ backToClients }}" style="background:none;border:none;color:var(--accent);font-size:12.5px;font-weight:600;cursor:pointer;padding:0;margin-bottom:14px;">&larr; All clients</button>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+            <h2 style="font-family:var(--font-serif);font-weight:600;font-size:1.2rem;margin:0;color:var(--fg1);">{{ selectedClient.name }}</h2>
+            <x-import component-from-global-scope="Pill" tone="{{ selectedClient.tone }}" hint-size="auto,22px">{{ selectedClient.status }}</x-import>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;">
+            <div style="background:var(--sand);border-radius:6px;padding:10px;"><div style="font-size:10px;color:var(--fg3);text-transform:uppercase;">Value</div><div style="font-weight:700;font-size:0.95rem;color:var(--fg1);">{{ selectedClient.value }}</div></div>
+            <div style="background:var(--sand);border-radius:6px;padding:10px;"><div style="font-size:10px;color:var(--fg3);text-transform:uppercase;">Margin</div><div style="font-weight:700;font-size:0.95rem;color:var(--accent);">{{ selectedClient.margin }}</div></div>
+            <div style="background:var(--sand);border-radius:6px;padding:10px;"><div style="font-size:10px;color:var(--fg3);text-transform:uppercase;">Balance due</div><div style="font-weight:700;font-size:0.95rem;color:var(--primary);">{{ selectedClient.due }}</div></div>
+          </div>
+          <div style="font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--fg3);font-weight:600;margin-bottom:8px;">Linked records</div>
+          <div style="display:flex;justify-content:space-between;font-size:0.85rem;padding:9px 0;border-bottom:1px solid var(--line-soft);color:var(--fg1);">Client dashboard (app + site)<span style="color:var(--accent);">Open &rsaquo;</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:0.85rem;padding:9px 0;border-bottom:1px solid var(--line-soft);color:var(--fg1);">{{ selectedClient.docs }} documents on file<span style="color:var(--accent);">View &rsaquo;</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:0.85rem;padding:9px 0;color:var(--fg1);">{{ selectedClient.suppliers }} suppliers booked<span style="color:var(--accent);">View &rsaquo;</span></div>
+        </sc-if>
+
+        <!-- PAYMENTS -->
+        <sc-if value="{{ isPayments }}">
+          <h2 style="font-family:var(--font-serif);font-weight:600;font-size:1.3rem;margin:0 0 18px;color:var(--fg1);">Payments &amp; deposits</h2>
+          <div style="display:grid;grid-template-columns:1.5fr 0.9fr 0.9fr 0.9fr;gap:0;font-size:10.5px;letter-spacing:0.05em;text-transform:uppercase;color:var(--fg3);font-weight:600;padding:0 12px 10px;border-bottom:1px solid var(--line);">
+            <div>Client</div><div>Amount</div><div>Type</div><div>Status</div>
+          </div>
+          <sc-for list="{{ payments }}" as="p" hint-placeholder-count="4">
+            <div style="display:grid;grid-template-columns:1.5fr 0.9fr 0.9fr 0.9fr;gap:0;font-size:0.85rem;padding:12px;border-bottom:1px solid var(--line-soft);align-items:center;">
+              <div style="font-weight:600;color:var(--fg1);">{{ p.client }}</div>
+              <div style="color:var(--fg2);">{{ p.amount }}</div>
+              <div style="color:var(--fg3);">{{ p.type }}</div>
+              <div><x-import component-from-global-scope="Pill" tone="{{ p.tone }}" hint-size="auto,22px">{{ p.status }}</x-import></div>
+            </div>
+          </sc-for>
+        </sc-if>
+
+        <!-- SUPPLIERS -->
+        <sc-if value="{{ isSuppliers }}">
+          <h2 style="font-family:var(--font-serif);font-weight:600;font-size:1.3rem;margin:0 0 18px;color:var(--fg1);">Supplier rolodex</h2>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;">
+            <sc-for list="{{ suppliers }}" as="sup" hint-placeholder-count="4">
+              <div style="border:1px solid var(--line);border-radius:8px;padding:14px 16px;">
+                <div style="font-weight:700;font-size:0.9rem;color:var(--fg1);margin-bottom:3px;">{{ sup.name }}</div>
+                <div style="font-size:0.78rem;color:var(--fg3);margin-bottom:6px;">{{ sup.type }} &middot; {{ sup.region }}</div>
+                <div style="font-size:0.78rem;color:var(--accent);font-weight:600;">{{ sup.commission }} commission</div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <!-- DOCUMENTS -->
+        <sc-if value="{{ isDocuments }}">
+          <h2 style="font-family:var(--font-serif);font-weight:600;font-size:1.3rem;margin:0 0 18px;color:var(--fg1);">Document hub</h2>
+          <div style="display:grid;grid-template-columns:1.5fr 0.9fr 0.9fr;gap:0;font-size:10.5px;letter-spacing:0.05em;text-transform:uppercase;color:var(--fg3);font-weight:600;padding:0 12px 10px;border-bottom:1px solid var(--line);">
+            <div>Document</div><div>Client</div><div>Type</div>
+          </div>
+          <sc-for list="{{ documents }}" as="d" hint-placeholder-count="4">
+            <div style="display:grid;grid-template-columns:1.5fr 0.9fr 0.9fr;gap:0;font-size:0.85rem;padding:12px;border-bottom:1px solid var(--line-soft);align-items:center;">
+              <div style="font-weight:600;color:var(--fg1);display:flex;align-items:center;gap:8px;"><x-import component-from-global-scope="Icon" name="file-text" size="15" hint-size="15px,15px"></x-import>{{ d.name }}</div>
+              <div style="color:var(--fg2);">{{ d.client }}</div>
+              <div style="color:var(--fg3);">{{ d.type }}</div>
+            </div>
+          </sc-for>
+        </sc-if>
+
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+const NAV_DEF = [
+  {id:"clients", label:"Clients", icon:"users"},
+  {id:"payments", label:"Payments", icon:"credit-card"},
+  {id:"suppliers", label:"Suppliers", icon:"handshake"},
+  {id:"documents", label:"Documents", icon:"file-text"},
+];
+
+const CLIENTS_DATA = [
+  {id:"brid", name:"Brid Walsh", status:"Live", tone:"sage", value:"\u20ac18.4k", margin:"22%", due:"2 Jul", docs:8, suppliers:6},
+  {id:"naidoo", name:"The Naidoos", status:"Draft", tone:"amber", value:"\u20ac9.1k", margin:"\u2014", due:"\u2014", docs:2, suppliers:0},
+  {id:"osei", name:"M. Osei", status:"Overdue", tone:"clay", value:"\u20ac4.6k", margin:"18%", due:"30 Jun", docs:5, suppliers:3},
+];
+
+const PAYMENTS_DATA = [
+  {client:"Brid Walsh", amount:"\u20ac9,200", type:"Deposit", status:"Paid", tone:"sage"},
+  {client:"Brid Walsh", amount:"\u20ac9,200", type:"Balance", status:"Due 2 Jul", tone:"amber"},
+  {client:"M. Osei", amount:"\u20ac4,600", type:"Balance", status:"Overdue", tone:"clay"},
+  {client:"The Naidoos", amount:"\u20ac2,000", type:"Deposit", status:"Pending", tone:"amber"},
+];
+
+const SUPPLIERS_DATA = [
+  {name:"EZ Shuttle", type:"Ground transport", region:"Western Cape", commission:"10%"},
+  {name:"Bellevue Forest Lodge", type:"Lodge", region:"Addo", commission:"12%"},
+  {name:"Centre-Ville Guest House", type:"Guest house", region:"Franschhoek", commission:"10%"},
+  {name:"Franschhoek Wine Tram", type:"Tour operator", region:"Franschhoek", commission:"15%"},
+];
+
+const DOCUMENTS_DATA = [
+  {name:"Flight e-tickets.pdf", client:"Brid Walsh", type:"Flights"},
+  {name:"Bantry Aparthotel voucher.pdf", client:"Brid Walsh", type:"Hotel"},
+  {name:"Travel insurance.pdf", client:"Brid Walsh", type:"Insurance"},
+  {name:"Deposit invoice.pdf", client:"The Naidoos", type:"Payment"},
+];
+
+class Component extends DCLogic {
+  state = { loggedIn: false, screen: "clients", selectedClientId: null };
+
+  login() { this.setState({ loggedIn: true }); }
+  logout() { this.setState({ loggedIn: false, screen: "clients", selectedClientId: null }); }
+  goTo(screen) { this.setState({ screen, selectedClientId: null }); }
+  openClient(id) { this.setState({ screen: "clientDetail", selectedClientId: id }); }
+  backToClients() { this.setState({ screen: "clients", selectedClientId: null }); }
+
+  renderVals() {
+    const s = this.state;
+    const activeTop = s.screen === "clientDetail" ? "clients" : s.screen;
+
+    const navItems = NAV_DEF.map(n => ({
+      ...n,
+      go: () => this.goTo(n.id),
+      bg: activeTop === n.id ? "rgba(251,244,233,0.12)" : "transparent",
+      color: activeTop === n.id ? "#fff" : "rgba(251,244,233,0.65)",
+      weight: activeTop === n.id ? 700 : 400,
+    }));
+
+    const clients = CLIENTS_DATA.map(c => ({ ...c, open: () => this.openClient(c.id) }));
+    const selectedClient = CLIENTS_DATA.find(c => c.id === s.selectedClientId) || CLIENTS_DATA[0];
+
+    return {
+      isLogin: !s.loggedIn,
+      isApp: s.loggedIn,
+      login: () => this.login(),
+      logout: () => this.logout(),
+      navItems,
+      isClients: s.screen === "clients",
+      isClientDetail: s.screen === "clientDetail",
+      isPayments: s.screen === "payments",
+      isSuppliers: s.screen === "suppliers",
+      isDocuments: s.screen === "documents",
+      clients,
+      selectedClient,
+      backToClients: () => this.backToClients(),
+      payments: PAYMENTS_DATA,
+      suppliers: SUPPLIERS_DATA,
+      documents: DOCUMENTS_DATA,
+    };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+/* ============================================================
+   THULA TRAVEL — Color & Type Foundations
+   Bespoke wellness & quiet retreats to South Africa, for women.
+   Palette: African sunset, fauna & flora — clay, amber, sage,
+   eucalyptus, dusk plum, on warm cream.
+   ============================================================ */
+
+/* ---- FONTS ----------------------------------------------------
+   Brand intent:
+     Headings  → "Amsterdam Three" (a signature brush script — COMMERCIAL)
+     Body text → "Recoleta"        (warm rounded serif      — COMMERCIAL)
+
+   Neither ships on Google Fonts. Until the real licensed files are
+   dropped into /fonts, we substitute the nearest free matches:
+     Amsterdam Three → "Dancing Script"  (warm, bold-capable signature script)
+     Recoleta        → "Fraunces"-class soft serif; we use "Lora"
+                        (classy, warm, highly legible at text sizes)
+   Load via Google Fonts <link> in HTML, or @import below.
+---------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+
+:root {
+  /* ---- TYPE FAMILIES ---- */
+  --font-script: 'Dancing Script', 'Brush Script MT', cursive;   /* Amsterdam Three stand-in */
+  --font-serif:  'Lora', Georgia, 'Times New Roman', serif;       /* Recoleta stand-in */
+  --font-text:   var(--font-serif);
+  --font-heading: var(--font-script);
+  --font-display: var(--font-script);   /* big headings; toggleable, kept separate from the logo */
+
+  /* ============================================================
+     COLOR — RAW PALETTE (South African flag)
+     Green · Gold · Chilli Red · National Blue · Black · White.
+     Official flag hexes anchor each family (·500 / deep tones);
+     softened tints/shades extend them for UI use. Alias names
+     (clay/amber/sage/forest/plum) are kept so components map cleanly:
+       clay   → RED      amber → GOLD     sage  → GREEN
+       forest → DEEP GREEN   plum → BLUE
+     ============================================================ */
+
+  /* RED — chilli red (flag #DE3831) — energy / primary CTA */
+  --clay-700: #9E2019;
+  --clay-600: #C32A22;
+  --clay-500: #DE3831;   /* PRIMARY · flag red */
+  --clay-400: #E85F58;
+  --clay-300: #F09B96;
+  --clay-200: #F6C5C2;
+  --clay-100: #FBE3E1;
+
+  /* GOLD — flag #FFB915 — warmth / highlight */
+  --amber-600: #C9870A;   /* darker, for text on light */
+  --amber-500: #FFB915;   /* SECONDARY · flag gold */
+  --amber-400: #FFCB52;
+  --amber-300: #FFDD8A;
+  --amber-100: #FFF3D6;
+
+  /* GREEN — spectrum green (flag #007A4D) — nature / wellness */
+  --sage-700: #00583A;
+  --sage-600: #006B45;
+  --sage-500: #007A4D;    /* ACCENT · flag green */
+  --sage-300: #7DBBA0;
+  --sage-100: #DCEFE6;
+
+  /* DEEP GREEN — for dark sections / footer (grounded) */
+  --forest-700: #073A22;
+  --forest-600: #0B4A2E;   /* DEEP */
+  --forest-500: #0E5A38;
+
+  /* BLUE — national flag blue (#002395) — deep accent */
+  --plum-600: #001C78;
+  --plum-500: #002395;     /* ACCENT-2 · flag blue */
+  --plum-300: #8E96C6;
+
+  /* Light tints (repurposed): warm gold wash */
+  --blush-300: #FFDD8A;
+  --blush-100: #FFF3D6;
+
+  /* ---- NEUTRALS — black & white, kept gently warm ---- */
+  --paper:     #FBF7EE;   /* page background — warm white */
+  --sand:      #F1EADB;   /* tonal section background */
+  --card:      #FFFDF8;   /* card / surface */
+  --line:      #E7DECD;   /* hairline / border */
+  --line-soft: #F2EBDD;
+
+  --ink:       #1F1E1A;   /* primary text — flag black, warmed */
+  --ink-soft:  #4D4A42;   /* secondary text */
+  --ink-mute:  #857F72;   /* muted / captions */
+
+  /* ============================================================
+     SEMANTIC TOKENS
+     ============================================================ */
+  --bg:            var(--paper);
+  --bg-tonal:      var(--sand);
+  --surface:       var(--card);
+  --surface-2:     var(--blush-100);
+  --border:        var(--line);
+
+  --fg1:           var(--ink);        /* headlines, primary copy */
+  --fg2:           var(--ink-soft);   /* body */
+  --fg3:           var(--ink-mute);   /* captions, meta */
+  --fg-on-dark:    #FBF4E9;
+  --fg-on-clay:    #FFF7F0;
+
+  --primary:       var(--clay-500);
+  --primary-press: var(--clay-700);
+  --primary-hover: var(--clay-600);
+  --secondary:     var(--amber-500);
+  --accent:        var(--sage-600);
+  --deep:          var(--forest-600);
+  --accent-2:      var(--plum-500);
+
+  --focus-ring:    var(--clay-400);
+
+  /* ============================================================
+     SHAPE — rounded, soft, generous (brand signature)
+     ============================================================ */
+  --r-xs:  6px;
+  --r-sm:  10px;
+  --r-md:  16px;
+  --r-lg:  24px;
+  --r-xl:  36px;
+  --r-pill: 999px;
+
+  /* ============================================================
+     SHADOW — warm, soft, low-contrast (sun-washed, never harsh)
+     ============================================================ */
+  --shadow-sm:  0 1px 2px rgba(30, 36, 28, 0.06), 0 2px 6px rgba(30, 36, 28, 0.05);
+  --shadow-md:  0 6px 18px rgba(30, 36, 28, 0.10), 0 2px 6px rgba(30, 36, 28, 0.06);
+  --shadow-lg:  0 18px 44px rgba(30, 36, 28, 0.16), 0 6px 14px rgba(30, 36, 28, 0.08);
+  --shadow-glow: 0 10px 30px rgba(222, 56, 49, 0.26);
+
+  /* ============================================================
+     SPACING (8pt-ish, warm rhythm)
+     ============================================================ */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --s-9: 96px;
+  --s-10: 128px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);      /* @kind other */
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);       /* @kind other */
+  --dur: 240ms;                                    /* @kind other */
+
+  /* ============================================================
+     FIGURE GRADIENTS — on-brand photo placeholders (BOLD flag)
+     Driven as vars so the palette toggle re-skins imagery too.
+     ============================================================ */
+  --fig-sunset:     linear-gradient(160deg, #FFDD8A 0%, #FFB915 30%, #DE3831 70%, #9E2019 100%);     /* @kind color */
+  --fig-savanna:    linear-gradient(155deg, #FFCB52 0%, #DE3831 58%, #9E2019 100%);                  /* @kind color */
+  --fig-fynbos:     linear-gradient(160deg, #7DBBA0 0%, #007A4D 48%, #00583A 100%);                  /* @kind color */
+  --fig-dusk:       linear-gradient(165deg, #FFB915 0%, #DE3831 46%, #002395 100%);                  /* @kind color */
+  --fig-eucalyptus: linear-gradient(160deg, #007A4D 0%, #0B4A2E 55%, #073A22 100%);                  /* @kind color */
+}
+
+/* ============================================================
+   CALM HERITAGE PALETTE — set data-palette="calm" on :root.
+   Green + gold lead, red reserved for CTAs, blue retired into
+   warm stone, everything desaturated onto a warmer cream.
+   Same token names → the whole system re-skins instantly.
+   ============================================================ */
+:root[data-palette="calm"] {
+  /* RED → muted terracotta (CTA only) */
+  --clay-700: #8A3326; --clay-600: #A8412E; --clay-500: #C24B3A;
+  --clay-400: #D47860; --clay-300: #E3A793; --clay-200: #EFC9BC; --clay-100: #F7E6DE;
+  /* GOLD → soft ochre */
+  --amber-600: #B07F2E; --amber-500: #E0A94E; --amber-400: #EAC07E;
+  --amber-300: #F1D5A6; --amber-100: #FAEFD8;
+  /* GREEN → muted sage/olive (now the lead) */
+  --sage-700: #3E4C36; --sage-600: #566848; --sage-500: #6E7F57;
+  --sage-300: #AEBA98; --sage-100: #E5E9DA;
+  /* DEEP GREEN */
+  --forest-700: #23362A; --forest-600: #324736; --forest-500: #425A47;
+  /* BLUE retired → warm stone */
+  --plum-600: #5C5140; --plum-500: #766A55; --plum-300: #B3A98F;
+  /* light tints */
+  --blush-300: #F1D5A6; --blush-100: #FAEFD8;
+  /* warmer neutrals */
+  --paper: #FBF4E9; --sand: #EFE3D0; --card: #FFFBF3;
+  --line: #E6D8C2; --line-soft: #F1E8D8;
+  --ink: #33291F; --ink-soft: #5C4B3C; --ink-mute: #8A7A68;
+  /* glow + figures */
+  --shadow-glow: 0 10px 30px rgba(194, 75, 58, 0.22);
+  --fig-sunset:     linear-gradient(160deg, #F1D5A6 0%, #E0A94E 32%, #C24B3A 70%, #8A3326 100%);  /* @kind color */
+  --fig-savanna:    linear-gradient(155deg, #EAC07E 0%, #C24B3A 60%, #8A3326 100%);  /* @kind color */
+  --fig-fynbos:     linear-gradient(160deg, #AEBA98 0%, #6E7F57 46%, #3E4C36 100%);  /* @kind color */
+  --fig-dusk:       linear-gradient(165deg, #E0A94E 0%, #C24B3A 46%, #5C5140 100%);  /* @kind color */
+  --fig-eucalyptus: linear-gradient(160deg, #6E7F57 0%, #425A47 55%, #23362A 100%);  /* @kind color */
+}
+
+/* ============================================================
+   TYPE SCALE — semantic
+   Big, brand-defining headings use the script.
+   Functional headings (h3+) & body use the soft serif for legibility.
+   ============================================================ */
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  line-height: 0.98;
+  letter-spacing: 0.5px;
+  color: var(--fg1);
+}
+
+h1, .h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.8rem, 5.5vw, 4.75rem);
+  line-height: 1.02;
+  color: var(--fg1);
+}
+
+h2, .h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.2rem, 4vw, 3.25rem);
+  line-height: 1.06;
+  color: var(--fg1);
+}
+
+/* From h3 down, switch to the serif so small headings stay readable */
+h3, .h3 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(1.4rem, 2.2vw, 1.875rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--fg1);
+}
+
+h4, .h4 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.3;
+  color: var(--fg1);
+}
+
+.eyebrow {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+p, .body {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--fg2);
+  text-wrap: pretty;
+}
+
+.lead {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.125rem, 1.6vw, 1.375rem);
+  line-height: 1.6;
+  color: var(--fg2);
+}
+
+.small, small {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--fg3);
+}
+
+.label {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: 0.01em;
+  color: var(--fg1);
+}

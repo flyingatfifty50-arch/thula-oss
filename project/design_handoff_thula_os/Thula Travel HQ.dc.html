@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link rel="stylesheet" href="_ds/thula-travel-design-system-e4d7566b-09e7-4eb9-8cfb-fa504a40e344/colors_and_type.css">
+  <link rel="stylesheet" href="_ds/thula-travel-design-system-e4d7566b-09e7-4eb9-8cfb-fa504a40e344/social/fonts-embed.css">
+  <link rel="stylesheet" href="_ds/thula-travel-design-system-e4d7566b-09e7-4eb9-8cfb-fa504a40e344/styles.css">
+  <script src="_ds/thula-travel-design-system-e4d7566b-09e7-4eb9-8cfb-fa504a40e344/_ds_bundle.js"></script>
+  <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.js"></script>
+  <style>
+    html{scroll-behavior:smooth;}
+    body{margin:0;background:var(--paper);}
+  </style>
+</helmet>
+
+<div style="font-family:var(--font-serif);color:var(--fg1);background:var(--paper);--accent:#317653;--deep:#317653;--sage-600:#317653;--sage-700:#26593f;">
+
+  <!-- ============ NAV ============ -->
+  <nav style="position:sticky;top:0;z-index:50;background:rgba(251,247,238,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;height:64px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+      <x-import component-from-global-scope="Wordmark" size="24" hint-size="90px,30px"></x-import>
+      <div style="display:flex;gap:18px;flex-wrap:wrap;">
+        <a href="#tracker" style="font-family:var(--font-serif);font-weight:600;font-size:12px;letter-spacing:0.05em;text-transform:uppercase;color:var(--fg2);text-decoration:none;white-space:nowrap;">Client tracker</a>
+        <a href="#payments" style="font-family:var(--font-serif);font-weight:600;font-size:12px;letter-spacing:0.05em;text-transform:uppercase;color:var(--fg2);text-decoration:none;white-space:nowrap;">Payments</a>
+        <a href="#suppliers" style="font-family:var(--font-serif);font-weight:600;font-size:12px;letter-spacing:0.05em;text-transform:uppercase;color:var(--fg2);text-decoration:none;white-space:nowrap;">Suppliers</a>
+        <a href="#documents" style="font-family:var(--font-serif);font-weight:600;font-size:12px;letter-spacing:0.05em;text-transform:uppercase;color:var(--fg2);text-decoration:none;white-space:nowrap;">Documents</a>
+        <a href="#destinations" style="font-family:var(--font-serif);font-weight:600;font-size:12px;letter-spacing:0.05em;text-transform:uppercase;color:var(--fg2);text-decoration:none;white-space:nowrap;">Destinations</a>
+        <a href="#template" style="font-family:var(--font-serif);font-weight:600;font-size:12px;letter-spacing:0.05em;text-transform:uppercase;color:var(--fg2);text-decoration:none;white-space:nowrap;">Dashboard template</a>
+        <a href="#countdown" style="font-family:var(--font-serif);font-weight:600;font-size:12px;letter-spacing:0.05em;text-transform:uppercase;color:var(--fg2);text-decoration:none;white-space:nowrap;">Pre-trip countdown</a>
+        <a href="#welcomehome" style="font-family:var(--font-serif);font-weight:600;font-size:12px;letter-spacing:0.05em;text-transform:uppercase;color:var(--fg2);text-decoration:none;white-space:nowrap;">Welcome home</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <header style="background:var(--deep);color:var(--fg-on-dark);padding:70px 0;">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+      <p style="font-family:var(--font-serif);font-weight:600;font-size:12.5px;letter-spacing:0.24em;text-transform:uppercase;color:var(--secondary);margin:0 0 16px;">Private &middot; internal use only</p>
+      <h1 style="font-family:var(--font-script);font-weight:700;font-size:clamp(2.6rem,6vw,4.2rem);line-height:1;margin:0 0 14px;color:var(--fg-on-dark);">Thula HQ</h1>
+      <p style="font-size:1.08rem;color:rgba(251,244,233,0.82);max-width:60ch;margin:0;line-height:1.6;">Your single front door. Everything that runs Thula Travel lives here &mdash; live client trips, and the systems and templates behind them. Keep this page private.</p>
+    </div>
+  </header>
+
+  <!-- ============ CLIENT DASHBOARDS (LIVE) ============ -->
+  <section style="padding:60px 0;border-bottom:1px solid var(--line);">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+      <p style="font-family:var(--font-serif);font-weight:600;font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--primary);margin:0 0 12px;">Client dashboards (live)</p>
+      <h2 style="font-family:var(--font-script);font-weight:600;font-size:clamp(1.6rem,3vw,2.2rem);margin:0 0 10px;color:var(--fg1);">The trips your clients are looking at right now</h2>
+      <div style="display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:20px 24px;margin-top:20px;max-width:640px;box-shadow:var(--shadow-sm);">
+        <div style="color:var(--accent);"><x-import component-from-global-scope="Icon" name="map-pin" size="26" hint-size="26px,26px"></x-import></div>
+        <div style="flex:1;">
+          <div style="font-weight:700;font-size:1.05rem;color:var(--fg1);">Brid Walsh</div>
+          <div style="font-size:0.9rem;color:var(--fg3);">South Africa &middot; departs 25 June 2026</div>
+        </div>
+        <a href="Thula Travel App.dc.html" style="font-family:var(--font-serif);font-weight:600;font-size:13px;color:var(--accent);background:var(--sage-100);border:1px solid var(--sage-300);padding:9px 16px;border-radius:var(--r-pill);text-decoration:none;white-space:nowrap;">Open app</a>
+        <a href="Thula Travel Client Website.dc.html" style="font-family:var(--font-serif);font-weight:600;font-size:13px;color:var(--primary);background:var(--clay-100);border:1px solid var(--clay-300);padding:9px 16px;border-radius:var(--r-pill);text-decoration:none;white-space:nowrap;">Open site</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLIENT TRACKER ============ -->
+  <section id="tracker" style="padding:80px 0;border-bottom:1px solid var(--line);background:var(--sand);">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+        <div style="color:var(--accent);"><x-import component-from-global-scope="Icon" name="clipboard-list" size="22" hint-size="22px,22px"></x-import></div>
+        <p style="font-family:var(--font-serif);font-weight:600;font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--primary);margin:0;">Run the business</p>
+      </div>
+      <h2 style="font-family:var(--font-script);font-weight:600;font-size:clamp(1.8rem,3.5vw,2.5rem);margin:0 0 16px;color:var(--fg1);">Client tracker</h2>
+      <p style="font-size:1.02rem;color:var(--fg2);max-width:62ch;margin:0 0 8px;line-height:1.6;">Your command centre. Every client, every trip, every stage, in one place. This is your private back-office &mdash; keep it to yourself.</p>
+      <ul style="margin:20px 0 28px;padding:0;list-style:none;max-width:64ch;">
+        <li style="display:flex;gap:10px;padding:6px 0;font-size:0.96rem;color:var(--fg1);"><span style="color:var(--accent);flex-shrink:0;">&rsaquo;</span>One row per client trip. Move it through the stages as things progress.</li>
+        <li style="display:flex;gap:10px;padding:6px 0;font-size:0.96rem;color:var(--fg1);"><span style="color:var(--accent);flex-shrink:0;">&rsaquo;</span>Link each row to its client dashboard, document hub entries, and payment records.</li>
+        <li style="display:flex;gap:10px;padding:6px 0;font-size:0.96rem;color:var(--fg1);"><span style="color:var(--accent);flex-shrink:0;">&rsaquo;</span>Use the views to see what's active, what's coming up, and what needs chasing.</li>
+      </ul>
+      <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;box-shadow:var(--shadow-sm);">
+        <div style="display:grid;grid-template-columns:2fr 1.4fr 1fr 1.2fr;padding:14px 20px;background:var(--sage-100);font-family:var(--font-serif);font-weight:600;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--sage-700);">
+          <div>Client</div><div>Destination</div><div>Travellers</div><div>Stage</div>
+        </div>
+        <div style="display:grid;grid-template-columns:2fr 1.4fr 1fr 1.2fr;padding:16px 20px;border-top:1px solid var(--line);align-items:center;font-size:0.95rem;">
+          <div style="font-weight:600;">Brid Walsh</div><div style="color:var(--fg2);">South Africa</div><div style="color:var(--fg2);">10</div>
+          <div><x-import component-from-global-scope="Pill" tone="sage" hint-size="auto,26px">Live &middot; travelling</x-import></div>
+        </div>
+        <div style="padding:16px 20px;border-top:1px solid var(--line);font-size:0.88rem;color:var(--fg3);font-style:italic;">No other clients tracked yet &mdash; add a row per new trip as you book it.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PAYMENTS & DEPOSITS ============ -->
+  <section id="payments" style="padding:80px 0;border-bottom:1px solid var(--line);">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+        <div style="color:var(--amber-600);"><x-import component-from-global-scope="Icon" name="credit-card" size="22" hint-size="22px,22px"></x-import></div>
+        <p style="font-family:var(--font-serif);font-weight:600;font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--primary);margin:0;">Run the business</p>
+      </div>
+      <h2 style="font-family:var(--font-script);font-weight:600;font-size:clamp(1.8rem,3.5vw,2.5rem);margin:0 0 16px;color:var(--fg1);">Payments &amp; deposits</h2>
+      <p style="font-size:1.02rem;color:var(--fg2);max-width:62ch;margin:0 0 8px;line-height:1.6;">Money in, money out. Track what's invoiced, what's paid, deposit deadlines, and supplier costs against client price. Private back-office.</p>
+      <ul style="margin:20px 0 28px;padding:0;list-style:none;max-width:64ch;">
+        <li style="display:flex;gap:10px;padding:6px 0;font-size:0.96rem;color:var(--fg1);"><span style="color:var(--amber-600);flex-shrink:0;">&rsaquo;</span>One row per payment (deposit, balance, supplier invoice).</li>
+        <li style="display:flex;gap:10px;padding:6px 0;font-size:0.96rem;color:var(--fg1);"><span style="color:var(--amber-600);flex-shrink:0;">&rsaquo;</span>Set a due date so deadlines surface in the views below.</li>
+        <li style="display:flex;gap:10px;padding:6px 0;font-size:0.96rem;color:var(--fg1);"><span style="color:var(--amber-600);flex-shrink:0;">&rsaquo;</span>Use status to see at a glance what's outstanding versus settled.</li>
+      </ul>
+      <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;box-shadow:var(--shadow-sm);">
+        <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;padding:14px 20px;background:var(--amber-100);font-family:var(--font-serif);font-weight:600;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--amber-600);">
+          <div>Payment</div><div>Amount</div><div>Due</div><div>Status</div>
+        </div>
+        <div style="padding:16px 20px;border-top:1px solid var(--line);font-size:0.88rem;color:var(--fg3);font-style:italic;">No payments logged yet &mdash; add a row per deposit, balance or supplier invoice.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SUPPLIER ROLODEX ============ -->
+  <section id="suppliers" style="padding:80px 0;border-bottom:1px solid var(--line);background:var(--sand);">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+        <div style="color:var(--accent);"><x-import component-from-global-scope="Icon" name="book-user" size="22" hint-size="22px,22px"></x-import></div>
+        <p style="font-family:var(--font-serif);font-weight:600;font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--primary);margin:0;">Run the business</p>
+      </div>
+      <h2 style="font-family:var(--font-script);font-weight:600;font-size:clamp(1.8rem,3.5vw,2.5rem);margin:0 0 16px;color:var(--fg1);">Supplier rolodex</h2>
+      <p style="font-size:1.02rem;color:var(--fg2);max-width:62ch;margin:0 0 8px;line-height:1.6;">Your little black book. Lodges, transfer companies, DMCs, guides &mdash; the contacts and booking refs you reuse trip after trip. Stop re-hunting the Addo lodge number.</p>
+      <ul style="margin:20px 0 28px;padding:0;list-style:none;max-width:64ch;">
+        <li style="display:flex;gap:10px;padding:6px 0;font-size:0.96rem;color:var(--fg1);"><span style="color:var(--accent);flex-shrink:0;">&rsaquo;</span>One row per supplier. Tag by type and destination so you can pull up everyone in a region fast.</li>
+        <li style="display:flex;gap:10px;padding:6px 0;font-size:0.96rem;color:var(--fg1);"><span style="color:var(--accent);flex-shrink:0;">&rsaquo;</span>Keep your direct contact, booking email, and any rate notes handy.</li>
+      </ul>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;">
+        <sc-for list="{{ suppliers }}" as="s" hint-placeholder-count="8">
+          <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);padding:18px 20px;position:relative;overflow:hidden;box-shadow:var(--shadow-sm);">
+            <div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:{{ s.color }};"></div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;">
+              <div>
+                <div style="font-weight:700;font-size:1rem;color:var(--fg1);">{{ s.name }}</div>
+                <div style="font-size:0.82rem;color:var(--fg3);margin-top:2px;">{{ s.type }} &middot; {{ s.region }}</div>
+              </div>
+              <x-import component-from-global-scope="Pill" tone="{{ s.tone }}" hint-size="auto,24px">{{ s.type }}</x-import>
+            </div>
+            <div style="font-size:0.88rem;color:var(--fg2);margin-top:10px;line-height:1.5;">{{ s.contact }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DOCUMENT HUB ============ -->
+  <section id="documents" style="padding:80px 0;border-bottom:1px solid var(--line);">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+        <div style="color:var(--primary);"><x-import component-from-global-scope="Icon" name="folder" size="22" hint-size="22px,22px"></x-import></div>
+        <p style="font-family:var(--font-serif);font-weight:600;font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--primary);margin:0;">Run the business</p>
+      </div>
+      <h2 style="font-family:var(--font-script);font-weight:600;font-size:clamp(1.8rem,3.5vw,2.5rem);margin:0 0 16px;color:var(--fg1);">Document hub</h2>
+      <p style="font-size:1.02rem;color:var(--fg2);max-width:62ch;margin:0 0 8px;line-height:1.6;">Where every client's documents live: booking confirmations, passports, insurance, visas. Keep this page private &mdash; never publish it to web, and never share it the way you share client dashboards.</p>
+      <ul style="margin:20px 0 20px;padding:0;list-style:none;max-width:64ch;">
+        <li style="display:flex;gap:10px;padding:6px 0;font-size:0.96rem;color:var(--fg1);"><span style="color:var(--primary);flex-shrink:0;">&rsaquo;</span>One row per document. Tag it with the client, the type, and a status.</li>
+        <li style="display:flex;gap:10px;padding:6px 0;font-size:0.96rem;color:var(--fg1);"><span style="color:var(--primary);flex-shrink:0;">&rsaquo;</span>Paste a link to the file (Drive, email) in the Link field rather than uploading sensitive scans where possible.</li>
+        <li style="display:flex;gap:10px;padding:6px 0;font-size:0.96rem;color:var(--fg1);"><span style="color:var(--primary);flex-shrink:0;">&rsaquo;</span>Use the views to see everything for one client, or just what's still outstanding.</li>
+      </ul>
+      <div style="background:var(--clay-100);border:1px solid var(--clay-300);border-radius:var(--r-md);padding:16px 20px;margin-bottom:24px;max-width:70ch;">
+        <div style="font-family:var(--font-serif);font-weight:700;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--primary);margin-bottom:6px;">Security note</div>
+        <div style="font-size:0.92rem;color:var(--fg1);">This hub holds sensitive personal documents. Keep sharing tightly scoped &mdash; internal only.</div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;box-shadow:var(--shadow-sm);">
+        <div style="display:grid;grid-template-columns:2fr 1.4fr 1fr 1.2fr;padding:14px 20px;background:var(--clay-100);font-family:var(--font-serif);font-weight:600;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--primary);">
+          <div>Document</div><div>Client</div><div>Type</div><div>Status</div>
+        </div>
+        <div style="padding:16px 20px;border-top:1px solid var(--line);font-size:0.88rem;color:var(--fg3);font-style:italic;">No documents logged yet &mdash; add a row per booking confirmation, passport, or insurance record.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DESTINATION KNOWLEDGE BASE ============ -->
+  <section id="destinations" style="padding:80px 0;border-bottom:1px solid var(--line);background:var(--sand);">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+        <div style="color:var(--accent);"><x-import component-from-global-scope="Icon" name="globe" size="22" hint-size="22px,22px"></x-import></div>
+        <p style="font-family:var(--font-serif);font-weight:600;font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--primary);margin:0;">Run the business</p>
+      </div>
+      <h2 style="font-family:var(--font-script);font-weight:600;font-size:clamp(1.8rem,3.5vw,2.5rem);margin:0 0 16px;color:var(--fg1);">Destination knowledge base</h2>
+      <p style="font-size:1.02rem;color:var(--fg2);max-width:62ch;margin:0 0 8px;line-height:1.6;">Your expertise, banked. Build a reusable tip sheet for each destination once, then pull from it every time you plan a trip there.</p>
+      <ul style="margin:20px 0 28px;padding:0;list-style:none;max-width:64ch;">
+        <li style="display:flex;gap:10px;padding:6px 0;font-size:0.96rem;color:var(--fg1);"><span style="color:var(--accent);flex-shrink:0;">&rsaquo;</span>One row per destination. Open it and build out tips, must-dos, where to eat, getting around.</li>
+        <li style="display:flex;gap:10px;padding:6px 0;font-size:0.96rem;color:var(--fg1);"><span style="color:var(--accent);flex-shrink:0;">&rsaquo;</span>When you plan a new trip there, copy from here into the client dashboard.</li>
+      </ul>
+      <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:28px 30px;box-shadow:var(--shadow-md);">
+        <div style="font-family:var(--font-serif);font-weight:600;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;">Destination entry</div>
+        <h3 style="font-family:var(--font-serif);font-weight:600;font-size:1.5rem;margin:0 0 14px;color:var(--fg1);">South Africa &middot; Cape Town, Addo &amp; Franschhoek</h3>
+        <p style="font-size:0.98rem;color:var(--fg2);line-height:1.65;margin:0 0 20px;max-width:70ch;">Cape winters (late June &ndash; early July) are mild by day, cold by night, and on the wet side. The safari side at Addo runs drier with chilly dawns. Pack warm layers, a waterproof, and something cosy for early game drives.</p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+          <div style="background:var(--sage-100);border-radius:var(--r-md);padding:18px;">
+            <div style="font-weight:700;font-size:0.98rem;color:var(--sage-700);margin-bottom:6px;">Cape Town</div>
+            <div style="font-size:0.88rem;color:var(--fg2);line-height:1.5;">City, ocean and Table Mountain &mdash; the peninsula drive, the Waterfront, and whale season starting in June.</div>
+          </div>
+          <div style="background:var(--clay-100);border-radius:var(--r-md);padding:18px;">
+            <div style="font-weight:700;font-size:0.98rem;color:var(--primary);margin-bottom:6px;">Addo</div>
+            <div style="font-size:0.88rem;color:var(--fg2);line-height:1.5;">Malaria-free Big Five country &mdash; game drives from the doorstep, dinner under the stars.</div>
+          </div>
+          <div style="background:var(--amber-100);border-radius:var(--r-md);padding:18px;">
+            <div style="font-weight:700;font-size:0.98rem;color:var(--amber-600);margin-bottom:6px;">Franschhoek</div>
+            <div style="font-size:0.88rem;color:var(--fg2);line-height:1.5;">The wine tram, estate lunches, and French Huguenot village charm in the Cape winelands.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLIENT DASHBOARD MASTER TEMPLATE ============ -->
+  <section id="template" style="padding:80px 0;border-bottom:1px solid var(--line);">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+        <div style="color:var(--accent);"><x-import component-from-global-scope="Icon" name="layout-template" size="22" hint-size="22px,22px"></x-import></div>
+        <p style="font-family:var(--font-serif);font-weight:600;font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--primary);margin:0;">Templates</p>
+      </div>
+      <h2 style="font-family:var(--font-script);font-weight:600;font-size:clamp(1.8rem,3.5vw,2.5rem);margin:0 0 16px;color:var(--fg1);">Client dashboard &mdash; master template</h2>
+      <p style="font-size:1.02rem;color:var(--fg2);max-width:64ch;margin:0 0 24px;line-height:1.65;">This is a client's home base while they're away: their day-by-day plan, all bookings, where to eat, local know-how, and a space to capture memories. Every new trip starts from this shape &mdash; see the mobile app and client website built from it already.</p>
+      <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:28px 30px;box-shadow:var(--shadow-sm);">
+        <div style="font-family:var(--font-serif);font-weight:700;font-size:1rem;color:var(--fg1);margin-bottom:14px;">How to clone this for each client</div>
+        <ol style="margin:0;padding:0 0 0 22px;color:var(--fg2);font-size:0.95rem;line-height:2;">
+          <li>Duplicate the master template.</li>
+          <li>Rename it for the client + trip (e.g. "The Naidoos, Vietnam, March 2026").</li>
+          <li>Fill in the emergency box, trip-at-a-glance, and populate the four sections: itinerary, bookings, restaurants, packing.</li>
+          <li>Share it so the client gets a clean, login-free mini-site on any device.</li>
+          <li>Delete these instructions from the client's copy.</li>
+        </ol>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px;">
+          <div style="background:var(--sand);border-radius:var(--r-sm);padding:14px;text-align:center;font-size:0.85rem;font-weight:600;color:var(--fg1);">Day-by-Day Itinerary</div>
+          <div style="background:var(--sand);border-radius:var(--r-sm);padding:14px;text-align:center;font-size:0.85rem;font-weight:600;color:var(--fg1);">Bookings &amp; Confirmations</div>
+          <div style="background:var(--sand);border-radius:var(--r-sm);padding:14px;text-align:center;font-size:0.85rem;font-weight:600;color:var(--fg1);">Restaurant Recommendations</div>
+          <div style="background:var(--sand);border-radius:var(--r-sm);padding:14px;text-align:center;font-size:0.85rem;font-weight:600;color:var(--fg1);">Packing &amp; Pre-Trip Checklist</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRE-TRIP COUNTDOWN ============ -->
+  <section id="countdown" style="padding:80px 0;border-bottom:1px solid var(--line);background:var(--sand);">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+        <div style="color:var(--amber-600);"><x-import component-from-global-scope="Icon" name="hourglass" size="22" hint-size="22px,22px"></x-import></div>
+        <p style="font-family:var(--font-serif);font-weight:600;font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--primary);margin:0;">Templates &middot; reusable section</p>
+      </div>
+      <h2 style="font-family:var(--font-script);font-weight:600;font-size:clamp(1.8rem,3.5vw,2.5rem);margin:0 0 10px;color:var(--fg1);">Your countdown to take-off</h2>
+      <p style="font-size:1.02rem;color:var(--fg2);max-width:64ch;margin:0 0 24px;line-height:1.65;">Drop this section into any client dashboard. It calms pre-trip nerves by telling clients exactly what to do, and when &mdash; especially reassuring for first-timers and older travellers.</p>
+      <div style="background:var(--card);border-left:4px solid var(--amber-500);border-radius:var(--r-md);padding:22px 26px;max-width:70ch;box-shadow:var(--shadow-sm);">
+        <div style="font-family:var(--font-serif);font-weight:700;font-size:1rem;color:var(--amber-600);margin-bottom:8px;">The day before</div>
+        <p style="font-size:0.98rem;color:var(--fg1);margin:0;line-height:1.6;">Charge everything, pack chargers and adapter, double-check passport and documents are in your hand luggage, and get an early night. You've got this.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WELCOME HOME ============ -->
+  <section id="welcomehome" style="padding:80px 0;">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+        <div style="color:var(--accent);"><x-import component-from-global-scope="Icon" name="home" size="22" hint-size="22px,22px"></x-import></div>
+        <p style="font-family:var(--font-serif);font-weight:600;font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--primary);margin:0;">Templates &middot; post-trip page</p>
+      </div>
+      <h2 style="font-family:var(--font-script);font-weight:600;font-size:clamp(1.8rem,3.5vw,2.5rem);margin:0 0 10px;color:var(--fg1);">Welcome home</h2>
+      <p style="font-size:1.02rem;color:var(--fg2);max-width:64ch;margin:0 0 24px;line-height:1.65;">Drop this into a client's dashboard once they're home, or send it as its own page. The end of a trip is your best moment to earn a review and a repeat booking &mdash; almost nobody designs for it.</p>
+      <div style="background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:30px;box-shadow:var(--shadow-sm);">
+        <h3 style="font-family:var(--font-serif);font-weight:600;font-size:1.3rem;margin:0 0 10px;color:var(--fg1);">Your trip, kept forever</h3>
+        <p style="font-size:0.96rem;color:var(--fg2);margin:0;line-height:1.6;max-width:64ch;">A space to gather photos, memories and reflections after landing home &mdash; the last page of the story you built together.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer style="background:var(--forest-700);color:rgba(251,244,233,0.84);padding:50px 0;">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;align-items:center;">
+      <x-import component-from-global-scope="Wordmark" size="26" color="var(--fg-on-dark)" hint-size="110px,34px"></x-import>
+      <div style="font-size:0.85rem;color:rgba(251,244,233,0.6);">Internal operations hub &middot; private &amp; confidential</div>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+const SUPPLIERS_DATA = [
+  {name:"EZ Shuttle", type:"Transfers", region:"Cape Town", tone:"amber", color:"var(--amber-600)", contact:"info@ezshuttle.co.za \u00b7 +27 21 376610 \u00b7 WhatsApp available"},
+  {name:"Kiff Kombi Tours", type:"Private guide", region:"Cape Town", tone:"clay", color:"var(--primary)", contact:"bookings@kiffkombitours.co.za \u00b7 private vintage kombi tours"},
+  {name:"City Sightseeing South Africa", type:"Hop-on hop-off", region:"Cape Town", tone:"plum", color:"var(--accent-2)", contact:"+27 21 511 6000 \u00b7 36 Auckland Street, Paarden Eiland, Cape Town"},
+  {name:"Franschhoek Wine Tram", type:"Wine tour", region:"Franschhoek", tone:"blush", color:"var(--clay-600)", contact:"bookings@winetram.co.za \u00b7 Orange Line departs Franschhoek Terminal"},
+  {name:"Tuk Tuk Franschhoek", type:"Wine tour", region:"Franschhoek", tone:"blush", color:"var(--clay-600)", contact:"+27 72 735 3035 \u00b7 info@tuktukfranschhoek.co.za \u00b7 Le Petit Manoir, 54 Huguenot Road"},
+  {name:"The Bantry Aparthotel", type:"Accommodation", region:"Cape Town", tone:"sage", color:"var(--accent)", contact:"021 035 0921 \u00b7 tropicana@perchstays.co.za \u00b7 perchstays.co.za"},
+  {name:"Bellevue Forest Lodge", type:"Accommodation", region:"Addo", tone:"clay", color:"var(--primary)", contact:"bellevueforest.co.za \u00b7 Big Five lodge, malaria-free"},
+  {name:"Centre-Ville Guest House", type:"Accommodation", region:"Franschhoek", tone:"amber", color:"var(--amber-600)", contact:"info@centre-ville.co.za \u00b7 centre-ville.co.za"},
+];
+
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      suppliers: SUPPLIERS_DATA,
+    };
+  }
+}
+
+</script>
+</body>
+</html>
