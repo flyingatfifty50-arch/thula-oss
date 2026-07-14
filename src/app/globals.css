@@ -1,0 +1,119 @@
+/* ============================================================
+   THULA TRAVEL APP — design tokens
+   Ported from the Thula Travel design system
+   (project/_ds/.../colors_and_type.css), with the app's own accent
+   override: green -> #317653 (per design handoff chat: "the green
+   needs to be 317653").
+   ============================================================ */
+
+:root {
+  /* ---- type families ---- */
+  --font-script: var(--font-dancing-script), 'Brush Script MT', cursive;
+  --font-serif: var(--font-lora), Georgia, 'Times New Roman', serif;
+
+  /* ---- raw palette (South African flag derived) ---- */
+  --clay-700: #9e2019;
+  --clay-600: #c32a22;
+  --clay-500: #de3831; /* primary · flag red */
+  --clay-400: #e85f58;
+  --clay-300: #f09b96;
+  --clay-200: #f6c5c2;
+  --clay-100: #fbe3e1;
+
+  --amber-600: #c9870a;
+  --amber-500: #ffb915; /* secondary · flag gold */
+  --amber-400: #ffcb52;
+  --amber-300: #ffdd8a;
+  --amber-100: #fff3d6;
+
+  /* green family overridden to the app's own brand green #317653 */
+  --sage-700: #26593f;
+  --sage-600: #317653;
+  --sage-500: #317653;
+  --sage-300: #7dbba0;
+  --sage-100: #dcefe6;
+
+  --forest-700: #073a22;
+  --forest-600: #317653; /* deep */
+  --forest-500: #0e5a38;
+
+  --plum-600: #001c78;
+  --plum-500: #002395; /* accent-2 · flag blue */
+  --plum-300: #8e96c6;
+
+  --blush-300: #ffdd8a;
+  --blush-100: #fff3d6;
+
+  /* ---- neutrals ---- */
+  --paper: #fbf7ee;
+  --sand: #f1eadb;
+  --card: #fffdf8;
+  --line: #e7decd;
+  --line-soft: #f2ebdd;
+
+  --ink: #1f1e1a;
+  --ink-soft: #4d4a42;
+  --ink-mute: #857f72;
+
+  /* ---- semantic tokens ---- */
+  --bg: var(--paper);
+  --bg-tonal: var(--sand);
+  --surface: var(--card);
+
+  --fg1: var(--ink);
+  --fg2: var(--ink-soft);
+  --fg3: var(--ink-mute);
+  --fg-on-dark: #fbf4e9;
+  --fg-on-clay: #fff7f0;
+
+  --primary: var(--clay-500);
+  --primary-press: var(--clay-700);
+  --primary-hover: var(--clay-600);
+  --secondary: var(--amber-500);
+  --accent: var(--sage-600);
+  --deep: var(--forest-600);
+  --accent-2: var(--plum-500);
+
+  /* ---- shape ---- */
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-xl: 36px;
+  --r-pill: 999px;
+
+  /* ---- shadow ---- */
+  --shadow-sm: 0 1px 2px rgba(30, 36, 28, 0.06), 0 2px 6px rgba(30, 36, 28, 0.05);
+  --shadow-md: 0 6px 18px rgba(30, 36, 28, 0.1), 0 2px 6px rgba(30, 36, 28, 0.06);
+  --shadow-lg: 0 18px 44px rgba(30, 36, 28, 0.16), 0 6px 14px rgba(30, 36, 28, 0.08);
+
+  /* ---- figure gradients (placeholder photography) ---- */
+  --fig-fynbos: linear-gradient(160deg, #7dbba0 0%, #007a4d 48%, #00583a 100%);
+  --fig-savanna: linear-gradient(155deg, #ffcb52 0%, #de3831 58%, #9e2019 100%);
+  --fig-sunset: linear-gradient(160deg, #ffdd8a 0%, #ffb915 30%, #de3831 70%, #9e2019 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background: var(--sand);
+}
+
+body {
+  font-family: var(--font-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  font-family: inherit;
+}
+
+a {
+  color: inherit;
+}
